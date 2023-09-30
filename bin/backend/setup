@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cd $(dirname $0)/../../
+
+docker compose build backend
+
+docker compose run backend rails db:create
+docker compose run backend rails db:create RAILS_ENV=test
