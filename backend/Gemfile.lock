@@ -75,6 +75,7 @@ GEM
     debug (1.8.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
+    diffy (3.4.2)
     erubi (1.12.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -153,6 +154,9 @@ GEM
       psych (>= 4.0.0)
     reline (0.3.8)
       io-console (~> 0.5)
+    ridgepole (1.2.1)
+      activerecord (>= 5.1, < 7.1)
+      diffy
     stringio (3.0.8)
     thor (1.2.2)
     timeout (0.4.0)
@@ -173,6 +177,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-cors
   rails (~> 7.0.8)
+  ridgepole
   tzinfo-data
 
 RUBY VERSION
