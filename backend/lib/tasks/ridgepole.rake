@@ -7,6 +7,7 @@ namespace :ridgepole do
   task apply: :environment do
     ridgepole!('--apply')
     Rake::Task['db:schema:dump'].invoke
+    Rake::Task['annotate_models'].invoke if Rails.env.development?
   end
 
   private
