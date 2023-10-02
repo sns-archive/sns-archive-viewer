@@ -24,4 +24,7 @@ $ docker compose run backend rails db:create RAILS_ENV=test
 ```
 
 ### 4. マイグレーションを行う
-<!-- Ridgepoleを用いる予定 -->
+以下のコマンドをホストマシン上で実行して下さい。
+```bash
+$ docker compose run backend rake ridgepole:apply
+```
