@@ -50,4 +50,9 @@ group :development do
 
   # Github: https://github.com/ctran/annotate_models
   gem 'annotate' # 各モデルのスキーマ情報を書き出してくれる
+
+  # Github: https://github.com/pry/pry-rails
+  gem 'pry-rails' # Pryをデフォルトのコンソールとして使用できるようにする(Pryの機能をRailsコンソール内で利用することができる)
+  # Github: https://github.com/deivid-rodriguez/pry-byebug
+  gem 'pry-byebug' # binding.pryを使えるようにする
 end
