@@ -1,28 +1,9 @@
-# RSpecとFactoryBotの導入
+# RSpecとFactoryBot
 ## はじめに
 - バックエンドの環境構築がまだの場合progaku-archiveリポジトリのREADME.mdを読み、バックエンドの環境構築を行ってください。
-- **RSpecとは** 
-  - RSpecはRubyのテストフレームワークです。
-- **FactoryBotとは**
-  - サンプルデータ（ダミーのインスタンス）を簡単に作成することができるテストツールです。
 
-## RSpecの導入手順
-### 1. コンテナの起動をする
-- カレントディレクトリに`docker-compose.yml`ファイルがあることを確認し、ホストマシン上で以下のコマンドを実行してください。
-  ```bash
-  # コンテナ起動
-  $ docker-compose up -d
-  ```
-- コンテナが起動すると以下のような表示となります。
-  ```bash
-  # 実行結果
-  [+] Running 3/3
-  - Network progaku-archive_default  Created                                                               0.0s 
-  - Container pa_database            Started                                                               0.5s 
-  - Container pa_backend             Started                                                               1.1s 
-  ```
-
-### 2. コンテナに入る
+## RSpecとFactoryBotの動作確認
+### 1. コンテナに入る
 - ホストマシン上で以下のコマンドを実行し、pa_backendというサービス名のコンテナに入ってください。
   ```bash
   # コンテナに入る
@@ -31,68 +12,6 @@
 - コンテナに入ると以下のような表示となります。
   ```
   root@3ed6ed815f0b:/usr/src/app#
-  ```
-
-### 3. RSpecの設定をする
-- pa_backendコンテナ内で以下のコマンドを実行してください
-  ```
-  rails g rspec:install
-  ```
-- コマンドを実行すると、いくつかのディレクトリとファイルが生成されます。
-  ```bash
-  # 実行結果
-  create  .rspec # 基本設定ファイル
-  create  spec   # backend/spec配下にあるファイルがテストとして実行される
-  create  spec/spec_helper.rb   # RSpecの全体的な設定を記述するファイル
-  create  spec/rails_helper.rb  # Rails特有の設定を記述するファイル
-  ```
-- .rspecに以下の記述を追加してください。
-  ```
-  --require spec_helper
-  --format documentation # 左の設定を追加する
-  ```
-- `--format documentation`と記述することで、テストコードの実行結果をターミナル上で表示してくれます。
-
-## FactoryBotの導入手順
-### 1. FactoryBotのコードを簡潔に書けるようにする
-- `backend/spec/rails_helper.rb`に以下の設定を追記してください。
-  ```ruby
-  RSpec.configure do |config|
-    # 下記を追記
-    config.include FactoryBot::Syntax::Methods
-
-    # 以下省略
-  end
-  ```
-- 上記の設定をすることでRSpecを書く際に、`FactoryBot.create(:hoge)`や`FactoryBot.build(:hoge)`の`FactoryBot`を省略できるようになります。
-
-### 2. FactoryBot用のディレクトリを生成する
-- `backend/spec/`直下に`factory`ディレクトリを作成してください。
-- 上記で作成した`factory`ディレクトリ内に`users.rb`というファイルを作成し、以下の内容を記述してください。
-  ```ruby
-  # frozen_string_literal: true
-
-  FactoryBot.define do
-    factory :user do
-      name { 'hogehoge' }
-      email { 'hogehoge@example.com' }
-    end
-  end
-  ```
-
-## RSpecとFactoryBotの動作確認
-### 1. テストコードを準備する
-- `backend/spec/`直下に`models`ディレクトリを作成してください。
-- 上記で作成した`models`ディレクトリ内に`user_spec.rb`というファイルを作成し、以下の内容を記述してください。
-  ```ruby
-  require 'rails_helper'
-
-  RSpec.describe User, type: :model do
-    it "is valid with valid attributes" do
-      user = build(:user)
-      expect(user).to be_valid
-    end
-  end
   ```
 
 ### 2. テストを実行する
@@ -110,3 +29,71 @@
   Finished in 0.07038 seconds (files took 3.77 seconds to load)
   1 example, 0 failures
   ```
+
+## RSpecについて
+### RSpecとは 
+- RSpecはRuby on Railsの開発でよく使われているテストフレームワーク
+- rubyに標準搭載されているminitestよりも様々な機能が使えて便利！
+
+### RSpecの特徴
+- `describe`や`it`などのメソッドを使用して直感的にわかりやすい（自然言語に近い）記述でテストを作成できる。
+- マッチャー（期待値と実際の値が一致するかを検証するオブジェクト）が多く提供されている。
+- テストケースやテストグループにタグを付けて、特定のタグのテストだけ実行することができる
+
+### 基本的な構文
+```ruby
+describe 'テスト対象のクラス名やメソッド名' do
+  context '条件や状態の説明' do
+    before do
+      # 事前準備
+    end
+
+    it '期待する動作の説明' do
+      # 期待動作
+      expect(実際の値).to eq 期待する値
+    end
+  end
+end
+```
+#### describe
+- テスト対象の機能を記述する
+- Model Specではクラス名やメソッド名を記述する
+- System Specでは一連の操作により動作確認したい機能や処理の名前を記述する
+#### context
+- テストの様々な条件の概要を記述する。
+- 例：〇〇の戻り値が△△のとき
+#### before
+- descreibeの中に複数のテストケースがある場合、事前処理をまとめて記述しておく
+- breforeブロック内の処理はitブロックの処理が実行されるたびに実行される
+#### it
+- 期待する動作の詳細や条件などの具体的なテストコードを記述する
+- itブロック内の記述が実行され、テストに成功すれば成功件数が1件カウントされる
+- 例外が発生した場合は`Error`、例外は起きていないがテストに失敗した場合は`Failure`にカウントされる
+
+### テストの実行方法
+#### 特定のファイルのみ実行する
+```bash
+# bundle exec rspec [ファイルパス]
+bundle exec rspec spec/system/users_spec.rb
+```
+#### 特定の行のみテストを実行する
+```bash
+# bundle exec rspec [ファイルパス]:[行数]
+bundle exec  rspec spec/system/users_spec.rb:10
+```
+
+## FactoryBotについて
+----
+続きはココから
+----
+
+### 参考記事
+- RSpecの導入手順
+  - https://qiita.com/taki_21/items/4f8d56571e2d51ed2a0e
+  - https://qiita.com/jnchito/items/42193d066bd61c740612
+- RSpecの基本的な使い方
+  - https://qiita.com/jnchito/items/42193d066bd61c740612
+  - https://qiita.com/awakia/items/2d9a70af86bc3488b241
+- FactoryBotの使い方
+  - https://qiita.com/kodai_0122/items/e755a128f1dade3f53c6
+  - https://qiita.com/andmorefine/items/a51fda98a0baeb4b89fa

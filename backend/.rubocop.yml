@@ -5,3 +5,26 @@ require:
   - rubocop-rails
   - rubocop-rspec
   - rubocop
+
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'vendor/**/*'
+    - 'tmp/**/*'
+
+# クラスやモジュールにコメントを付与する制約をかけたくないため。
+Style/Documentation:
+  Enabled: false
+
+Layout/LineLength:
+  CountComments: false
+  Max: 120
+
+Metrics/MethodLength:
+  Max: 13
+
+ClassLength:
+  CountComments: false
+  Max: 100
