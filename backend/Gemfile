@@ -68,7 +68,6 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem 'rspec-rails' # RSpecのgem
   gem 'factory_bot_rails' # FactoryBotのgem
+  gem 'rspec-rails' # RSpecのgem
 end
-

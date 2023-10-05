@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_01_132321) do
+ActiveRecord::Schema[7.0].define(version: 20_231_001_132_321) do
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", null: false, comment: "ユーザーのEmailアドレス"
     t.string "password", null: false, comment: "ユーザーのpassword"
