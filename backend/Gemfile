@@ -13,7 +13,7 @@ gem "mysql2", "~> 0.5"
 gem "puma", "~> 5.0"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-# gem "jbuilder"
+gem "jbuilder" # JSONを生成するのに使用する
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
@@ -48,8 +48,22 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 
+  # Github: https://github.com/rubocop/rubocop
+  gem 'rubocop', require: false
+  # Github: https://github.com/rubocop/rubocop-performance
+  gem "rubocop-performance", require: false
+  # Github: https://github.com/rubocop/rubocop-rails
+  gem "rubocop-rails", require: false
+  # Github: https://github.com/rubocop/rubocop-rspec
+  gem "rubocop-rspec", require: false
+
   # Github: https://github.com/ctran/annotate_models
   gem 'annotate' # 各モデルのスキーマ情報を書き出してくれる
+
+  # Github: https://github.com/pry/pry-rails
+  gem 'pry-rails' # Pryをデフォルトのコンソールとして使用できるようにする(Pryの機能をRailsコンソール内で利用することができる)
+  # Github: https://github.com/deivid-rodriguez/pry-byebug
+  gem 'pry-byebug' # binding.pryを使えるようにする
 end
 
 group :test do
