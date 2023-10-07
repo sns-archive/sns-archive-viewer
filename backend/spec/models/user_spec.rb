@@ -9,7 +9,7 @@
 #  updated_at                     :datetime         not null
 #
 RSpec.describe User, type: :model do
-  it "is valid with valid attributes" do
+  it "有効な属性を持つ場合" do
     user = build(:user)
     expect(user).to be_valid
   end
