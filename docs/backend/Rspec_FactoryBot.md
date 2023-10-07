@@ -1,9 +1,9 @@
 # RSpecとFactoryBot
 ## 目次
-- RSpecとFactoryBotの動作確認
-- RSpecについて
-- FactoryBotについて
-- 参考記事
+- [RSpecとFactoryBotの動作確認](#rspecとfactorybotの動作確認)
+- [RSpecについて](#rspecについて)
+- [FactoryBotについて](#factorybotについて)
+- [参考記事](#参考記事)
 
 ## RSpecとFactoryBotの動作確認
 ### 0. はじめに
@@ -81,7 +81,7 @@ bundle exec rspec spec/system/users_spec.rb
 #### 特定の行のみテストを実行する
 ```bash
 # bundle exec rspec [ファイルパス]:[行数]
-bundle exec  rspec spec/system/users_spec.rb:10
+bundle exec rspec spec/system/users_spec.rb:10
 ```
 
 ## FactoryBotについて
@@ -107,16 +107,27 @@ bundle exec  rspec spec/system/users_spec.rb:10
 - DBにレコードは**追加されない**
   ```ruby
   ＜使用例＞
-  # Userクラスのインスタンスを作成
   FactoryBot.build(:user)
+  # FactoryBotは省略可
+  build(:user)
   ```
+
 #### createメソッド
 - factoryで定義されたモデルオブジェクトのインスタンスを生成する
 - DBにレコードを**追加する**
   ```ruby
   ＜使用例＞
-  # Userクラスのインスタンスを作成
   FactoryBot.create(:user)
+  # FactoryBotは省略可
+  create(:user)
+  ```
+#### メソッドの前に付けるFactoryBotの記述を省略する
+- `rails_helper.rb`に以下の設定を追加することで、factory_botメソッドの前に`FactoryBot`を付ける必要がなくなる
+- 今回準備した環境では既に設定済み
+  ```ruby
+  RSpec.configure do |config|
+    config.include FactoryBot::Syntax::Methods
+  end
   ```
 
 ## 参考記事
