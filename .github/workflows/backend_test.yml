@@ -1,5 +1,9 @@
 name: Backend CI
-on: pull_request
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/backend_test.yml"
+      - "backend/**"
 
 jobs:
   rspec_and_rubocop:

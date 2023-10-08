@@ -44,17 +44,4 @@ Rubocopを走らせるには、以下のコマンドをホストマシン上で�
 $ docker compose run backend bundle exec rubocop
 ```
 
-Rubocopのauto-correctを実行するには、以下のオプションをつけてコマンドをホストマシン上で実行して下さい。
-
-#### 【-a】オプション
-RuboCopが安全に自動修正できる違反を自動修正します。
-```bash
-$ docker compose run backend bundle exec rubocop -a
-```
-
-#### 【-A】オプション
--aの範囲を超えて、すべての違反、つまり安全とは限らないものも含めて自動修正を試みます。
-```bash
-$ docker compose run backend bundle exec rubocop -A
-```
 
