@@ -19,6 +19,7 @@ jobs:
       - name: Create and Setup DB
         run: |
           docker compose run backend rails db:create RAILS_ENV=test
+          sleep 10
           docker compose run backend rake ridgepole:apply
 
       - name: Run Rubocop
