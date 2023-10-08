@@ -43,5 +43,3 @@ Rubocopを走らせるには、以下のコマンドをホストマシン上で�
 ```bash
 $ docker compose run backend bundle exec rubocop
 ```
-
-
