@@ -19,7 +19,12 @@ jobs:
       
       - name: Create and Setup DB
         run: |
-          docker compose run backend rails db:create RAILS_ENV=test
+          for i in {1..10}; do
+            docker compose run backend rails db:create RAILS_ENV=test && break
+            echo "Waiting for MySQL to be ready..."
+            sleep 5
+          done
+
 
       - name: Run Rubocop
         run: docker compose run backend bundle exec rubocop
