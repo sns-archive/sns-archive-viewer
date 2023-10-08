@@ -18,13 +18,14 @@ jobs:
           docker compose build backend
       
       - name: Create and Setup DB
+      # MySQLコンテナが応答できるまで10秒スリープする
+      # Ref: https://qiita.com/KazuyaInoue/items/758b3da37ecdf3039baf
         run: |
-          for i in {1..10}; do
-            docker compose run backend rails db:create RAILS_ENV=test && break
-            echo "Waiting for MySQL to be ready..."
-            sleep 5
-          done
-
+          docker compose up -d db
+          sleep 10
+          docker compose run backend rails db:create
+          docker compose run backend rails db:create RAILS_ENV=test
+          docker compose run backend rake ridgepole:apply
 
       - name: Run Rubocop
         run: docker compose run backend bundle exec rubocop
