@@ -16,7 +16,9 @@ jobs:
       - name: Build Docker image
         run: |
           docker compose build backend
-          sleep 10
+
+      - name: compose up DB container
+        run: docker compose up db
       
       - name: Create and Setup DB
         run: |
