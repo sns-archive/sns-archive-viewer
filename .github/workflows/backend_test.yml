@@ -14,12 +14,13 @@ jobs:
         run: cp infra/env/backend.env.template infra/env/backend.env
 
       - name: Build Docker image
-        run: docker compose build backend
+        run: |
+          docker compose build backend
+          sleep 10
       
       - name: Create and Setup DB
         run: |
           docker compose run backend rails db:create RAILS_ENV=test
-          sleep 10
           docker compose run backend rake ridgepole:apply
 
       - name: Run Rubocop
