@@ -16,14 +16,10 @@ jobs:
       - name: Build Docker image
         run: |
           docker compose build backend
-
-      - name: compose up DB container
-        run: docker compose up db
       
       - name: Create and Setup DB
         run: |
           docker compose run backend rails db:create RAILS_ENV=test
-          docker compose run backend rake ridgepole:apply
 
       - name: Run Rubocop
         run: docker compose run backend bundle exec rubocop
