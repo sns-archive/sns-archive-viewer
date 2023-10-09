@@ -1,8 +1,12 @@
-name: Backend Test and Lint
-on: pull_request
+name: Backend CI
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/backend_test.yml"
+      - "backend/**"
 
 jobs:
-  Rubocop:
+  rspec_and_rubocop:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -14,7 +18,21 @@ jobs:
         run: cp infra/env/backend.env.template infra/env/backend.env
 
       - name: Build Docker image
-        run: docker compose build backend
+        run: |
+          docker compose build backend
+      
+      - name: Create and Setup DB
+      # MySQLコンテナが応答できるまで10秒スリープする
+      # Ref: https://qiita.com/KazuyaInoue/items/758b3da37ecdf3039baf
+        run: |
+          docker compose up -d db
+          sleep 10
+          docker compose run backend rails db:create
+          docker compose run backend rails db:create RAILS_ENV=test
+          docker compose run backend rake ridgepole:apply
 
       - name: Run Rubocop
         run: docker compose run backend bundle exec rubocop
+      
+      - name: Run Rspec
+        run: docker compose run backend bundle exec rspec

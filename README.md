@@ -28,3 +28,18 @@ $ docker compose run backend rails db:create RAILS_ENV=test
 ```bash
 $ docker compose run backend rake ridgepole:apply
 ```
+
+## その他
+
+### Rspecを実行する
+Rspecを走らせるには、以下のコマンドをホストマシン上で実行して下さい。
+詳しくは、[こちらのドキュメント](docs/backend/Rspec_FactoryBot.md)を参照して下さい。
+```bash
+$ docker compose run backend bundle exec rspec
+```
+
+### Rubocopを実行する
+Rubocopを走らせるには、以下のコマンドをホストマシン上で実行して下さい。
+```bash
+$ docker compose run backend bundle exec rubocop
+```
