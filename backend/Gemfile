@@ -74,4 +74,7 @@ group :test do
 
   # Github: https://github.com/rspec/rspec-rails
   gem 'rspec-rails' # RSpecのgem
+
+  # Github: https://github.com/ruby-i18n/i18n
+  gem 'rails-i18n' #i18n 日本語化対応用gem
 end
