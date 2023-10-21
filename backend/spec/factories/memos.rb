@@ -4,11 +4,11 @@
 #
 # Table name: memos
 #
-#  id         :bigint           not null, primary key
-#  content    :text(65535)
-#  title      :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id                    :bigint           not null, primary key
+#  content(メモの本文)   :string(255)      not null
+#  title(メモのタイトル) :string(255)      not null
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
 #
 FactoryBot.define do
   factory :memo do
