@@ -29,3 +29,7 @@ Metrics/MethodLength:
 ClassLength:
   CountComments: false
   Max: 100
+
+# RSpec/ContextWordingを無効
+RSpec/ContextWording:
+  Enabled: false
