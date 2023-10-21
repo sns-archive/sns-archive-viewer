@@ -12,7 +12,7 @@
 #
 RSpec.describe Memo, type: :model do
   describe 'バリデーションのテスト' do
-    context 'when titleとcontentが有効な場合' do
+    context 'title と content が有効な場合' do
       let(:memo) { build(:memo) }
 
       it 'valid?メソッドがtrueを返す' do
