@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: memos
@@ -10,7 +12,7 @@
 #
 RSpec.describe Memo, type: :model do
   describe 'バリデーションのテスト' do
-    context 'titleとcontentが有効な場合' do
+    context 'title と content が有効な場合' do
       let(:memo) { build(:memo) }
 
       it 'valid?メソッドがtrueを返す' do
@@ -47,7 +49,7 @@ RSpec.describe Memo, type: :model do
 
       it 'valid?メソッドがfalseを返し、errorsに「コンテンツを入力してください」と格納される' do
         aggregate_failures do
-          result =  memo.valid?
+          result = memo.valid?
           expect(result).to eq false
           expect(memo.errors.full_messages).to eq ['コンテンツを入力してください']
         end
