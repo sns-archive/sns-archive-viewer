@@ -174,6 +174,9 @@ GEM
     rails-html-sanitizer (1.6.0)
       loofah (~> 2.21)
       nokogiri (~> 1.14)
+    rails-i18n (7.0.8)
+      i18n (>= 0.7, < 2)
+      railties (>= 6.0.0, < 8)
     railties (7.0.8)
       actionpack (= 7.0.8)
       activesupport (= 7.0.8)
@@ -192,6 +195,23 @@ GEM
     ridgepole (1.2.1)
       activerecord (>= 5.1, < 7.1)
       diffy
+    rspec-core (3.12.2)
+      rspec-support (~> 3.12.0)
+    rspec-expectations (3.12.3)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.12.0)
+    rspec-mocks (3.12.6)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.12.0)
+    rspec-rails (6.0.3)
+      actionpack (>= 6.1)
+      activesupport (>= 6.1)
+      railties (>= 6.1)
+      rspec-core (~> 3.12)
+      rspec-expectations (~> 3.12)
+      rspec-mocks (~> 3.12)
+      rspec-support (~> 3.12)
+    rspec-support (3.12.1)
     rubocop (1.56.4)
       base64 (~> 0.1.1)
       json (~> 2.3)
@@ -222,23 +242,6 @@ GEM
       rubocop-capybara (~> 2.17)
       rubocop-factory_bot (~> 2.22)
     ruby-progressbar (1.13.0)
-    rspec-core (3.12.2)
-      rspec-support (~> 3.12.0)
-    rspec-expectations (3.12.3)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.12.0)
-    rspec-mocks (3.12.6)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.12.0)
-    rspec-rails (6.0.3)
-      actionpack (>= 6.1)
-      activesupport (>= 6.1)
-      railties (>= 6.1)
-      rspec-core (~> 3.12)
-      rspec-expectations (~> 3.12)
-      rspec-mocks (~> 3.12)
-      rspec-support (~> 3.12)
-    rspec-support (3.12.1)
     stringio (3.0.8)
     thor (1.2.2)
     timeout (0.4.0)
@@ -258,20 +261,21 @@ DEPENDENCIES
   annotate
   bootsnap
   debug
-  jbuilder
   factory_bot_rails
+  jbuilder
   mysql2 (~> 0.5)
   pry-byebug
   pry-rails
   puma (~> 5.0)
   rack-cors
   rails (~> 7.0.8)
+  rails-i18n
   ridgepole
+  rspec-rails
   rubocop
   rubocop-performance
   rubocop-rails
   rubocop-rspec
-  rspec-rails
   tzinfo-data
 
 RUBY VERSION

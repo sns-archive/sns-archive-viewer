@@ -1,0 +1,10 @@
+ja:
+  activerecord:
+    attributes:
+      memo:
+        title: タイトル
+        content: コンテンツ
+  errors:
+    models:
+      memo:
+        blank: を入力してください
