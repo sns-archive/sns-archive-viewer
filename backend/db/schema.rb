@@ -11,9 +11,16 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_10_21_054043) do
-  create_table "memos", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "memo", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title", null: false, comment: "メモのタイトル"
     t.string "content", null: false, comment: "メモの本文"
+    t.timestamp "created_at", null: false
+    t.timestamp "updated_at", null: false
+  end
+
+  create_table "memos", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "title", null: false, comment: "メモのタイトル"
+    t.text "content", null: false, comment: "メモの本文"
     t.timestamp "created_at", null: false
     t.timestamp "updated_at", null: false
   end
@@ -24,4 +31,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_21_054043) do
     t.timestamp "created_at", null: false
     t.timestamp "updated_at", null: false
   end
+
 end
