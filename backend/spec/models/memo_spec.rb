@@ -72,4 +72,13 @@ RSpec.describe Memo, type: :model do
       end
     end
   end
+
+  describe 'アソシエーションのテスト' do
+    context 'Commentモデルとの関係' do
+      it '1:Nとなっている' do
+        association = Memo.reflect_on_association(:comments)
+        expect(association.macro).to eq(:has_many)
+      end
+    end
+  end
 end
