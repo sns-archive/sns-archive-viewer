@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: comments
@@ -52,7 +54,7 @@ RSpec.describe Comment, type: :model do
   describe 'アソシエーションのテスト' do
     context 'Memoモデルとの関係' do
       it '1:Nの関係になっている' do
-        association = Comment.reflect_on_association(:memo)
+        association = described_class.reflect_on_association(:memo)
         expect(association.macro).to eq(:belongs_to)
       end
     end
