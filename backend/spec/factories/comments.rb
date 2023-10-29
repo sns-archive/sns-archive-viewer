@@ -14,8 +14,8 @@
 #
 
 FactoryBot.define do
-    factory :comment do
-        content { 'sample_comment' }
-        memo
-    end
+  factory :comment do
+    content { 'sample_comment' }
+    memo
+  end
 end

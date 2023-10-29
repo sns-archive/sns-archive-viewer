@@ -13,6 +13,6 @@
 #  index_comments_on_memo_id  (memo_id)
 #
 class Comment < ApplicationRecord
-    validates :content, presence: true
-    belongs_to :memo
+  validates :content, presence: true
+  belongs_to :memo
 end

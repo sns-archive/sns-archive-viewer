@@ -12,7 +12,7 @@
 #
 #  index_comments_on_memo_id  (memo_id)
 #
-require "test_helper"
+require 'test_helper'
 
 class CommentTest < ActiveSupport::TestCase
   # test "the truth" do
