@@ -7,8 +7,5 @@ ja:
       comment:
         content: 内容
   errors:
-    models:
-      memo:
-        blank: を入力してください
-      comment:
-        blank: を入力してください
+    messages:
+      blank: を入力してください

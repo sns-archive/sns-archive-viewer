@@ -16,5 +16,6 @@
 #
 class Comment < ApplicationRecord
   validates :content, presence: true
+  validates :memo_id, presence: true
   belongs_to :memo
 end
