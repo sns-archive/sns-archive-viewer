@@ -8,6 +8,7 @@ require:
   - rubocop-factory_bot
 
 AllCops:
+  NewCops: enable
   Exclude:
     - 'bin/**/*'
     - 'db/**/*'
@@ -18,10 +19,6 @@ AllCops:
 # クラスやモジュールにコメントを付与する制約をかけたくないため。
 Style/Documentation:
   Enabled: false
-
-Layout/LineLength:
-  CountComments: false
-  Max: 120
 
 Metrics/MethodLength:
   Max: 13

@@ -10,7 +10,7 @@
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #
-RSpec.describe Memo, type: :model do
+RSpec.describe Memo do
   subject(:memo) { build(:memo) }
 
   describe 'バリデーションのテスト' do
@@ -24,7 +24,7 @@ RSpec.describe Memo, type: :model do
       before { memo.title = '' }
 
       it 'valid?メソッドがfalseを返すこと' do
-        expect(memo).to be_invalid
+        expect(memo).not_to be_valid
       end
 
       it 'errorsに「タイトルを入力してください」と格納されること' do
@@ -37,7 +37,7 @@ RSpec.describe Memo, type: :model do
       before { memo.title = nil }
 
       it 'valid?メソッドがfalseを返すこと' do
-        expect(memo).to be_invalid
+        expect(memo).not_to be_valid
       end
 
       it 'errorsに「タイトルを入力してください」と格納されること' do
@@ -50,7 +50,7 @@ RSpec.describe Memo, type: :model do
       before { memo.content = '' }
 
       it 'valid?メソッドがfalseを返すこと' do
-        expect(memo).to be_invalid
+        expect(memo).not_to be_valid
       end
 
       it 'errorsに「コンテンツを入力してください」と格納されること' do
@@ -63,7 +63,7 @@ RSpec.describe Memo, type: :model do
       before { memo.content = nil }
 
       it 'valid?メソッドがfalseを返すこと' do
-        expect(memo).to be_invalid
+        expect(memo).not_to be_valid
       end
 
       it 'errorsに「コンテンツを入力してください」と格納されること' do
