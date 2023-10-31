@@ -77,4 +77,7 @@ group :test do
 
   # Github: https://github.com/ruby-i18n/i18n
   gem 'rails-i18n' # i18n 日本語化対応用gem
+
+  # Github: https://github.com/faker-ruby/faker
+  gem 'faker' # ランダムなテストデータ生成に使用
 end
