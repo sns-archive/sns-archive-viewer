@@ -33,6 +33,9 @@ gem "bootsnap", require: false
 # Github: https://github.com/ridgepole/ridgepole
 gem 'ridgepole' # マイグレーションに使用するgem
 
+# Github: https://github.com/ruby-i18n/i18n
+gem 'rails-i18n' # i18n 日本語化対応用gem
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
@@ -42,11 +45,11 @@ gem "rack-cors"
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
-end
 
-group :development do
-  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
+  # Github: https://github.com/pry/pry-rails
+  gem 'pry-rails' # Pryをデフォルトのコンソールとして使用できるようにする(Pryの機能をRailsコンソール内で利用することができる)
+  # Github: https://github.com/deivid-rodriguez/pry-byebug
+  gem 'pry-byebug' # binding.pryを使えるようにする
 
   # Github: https://github.com/rubocop/rubocop
   gem 'rubocop', require: false
@@ -56,14 +59,14 @@ group :development do
   gem "rubocop-rails", require: false
   # Github: https://github.com/rubocop/rubocop-rspec
   gem "rubocop-rspec", require: false
+end
+
+group :development do
+  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
+  # gem "spring"
 
   # Github: https://github.com/ctran/annotate_models
   gem 'annotate' # 各モデルのスキーマ情報を書き出してくれる
-
-  # Github: https://github.com/pry/pry-rails
-  gem 'pry-rails' # Pryをデフォルトのコンソールとして使用できるようにする(Pryの機能をRailsコンソール内で利用することができる)
-  # Github: https://github.com/deivid-rodriguez/pry-byebug
-  gem 'pry-byebug' # binding.pryを使えるようにする
 end
 
 group :test do
@@ -75,6 +78,6 @@ group :test do
   # Github: https://github.com/rspec/rspec-rails
   gem 'rspec-rails' # RSpecのgem
 
-  # Github: https://github.com/ruby-i18n/i18n
-  gem 'rails-i18n' # i18n 日本語化対応用gem
+  # Github: https://github.com/faker-ruby/faker
+  gem 'faker' # ランダムなテストデータ生成に使用
 end
