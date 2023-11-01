@@ -19,7 +19,8 @@ RSpec.describe Comment, type: :model do
 
   describe 'バリデーションのテスト' do
     context 'memo_idとcontentが有効な場合' do
-      let(:comment) { create(:comment) }
+      let(:memo) { create(:memo) }
+      let(:comment) { build(:comment, memo: memo) }
 
       it 'valid?メソッドがtrueを返すこと' do
         expect(comment).to be_valid
