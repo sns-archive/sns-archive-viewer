@@ -1,6 +1,19 @@
 # progaku-archive
 Progakuのアーカイブ用のアプリ
 
+## ドキュメント
+- ドキュメントのリンクは[こちら](docs/)
+  - [バックエンド](docs/backend/)
+    - [バックエンドのCIについて](docs/backend/ci.md)
+    - [DB関連の説明(マイグレーション方法等)](docs/backend/database.md)
+    - [RSpecとFactoryBot](docs/backend/Rspec_FactoryBot.md)
+    - [Rubocopについて](docs/backend/rubocop.md)
+  - [フロントエンド](docs/frontend/)
+    - [バックエンドのCIについて](docs/frontend/ci.md)
+  - [その他のドキュメント群](docs/others/)
+    - [Git/Githubについて](docs/others/git_and_github.md)
+    - [シェルスクリプトの説明](docs/others/shell_script.md)
+
 ## バックエンドの環境構築
 ### 1. envファイルを作成して記述する
 `infra/env/backend.env`を作成して、`infra/env/backend.env.template`の内容を元に記述する。

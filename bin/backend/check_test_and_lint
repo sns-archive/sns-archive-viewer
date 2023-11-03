@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd $(dirname $0)/../../
+
+docker compose run backend bundle exec rubocop
+docker compose run backend bundle exec rspec
