@@ -14,7 +14,7 @@
 #
 #  index_comments_on_memo_id  (memo_id)
 #
-RSpec.describe Comment, type: :model do
+RSpec.describe Comment do
   subject(:comment) { build(:comment) }
 
   describe 'バリデーションのテスト' do
@@ -31,12 +31,12 @@ RSpec.describe Comment, type: :model do
       before { comment.content = ' ' }
 
       it 'valid?メソッドがfalseを返すこと' do
-        expect(comment).to be_invalid
+        expect(comment).not_to be_valid
       end
 
       it 'errorsに「内容を入力してください」と格納されること' do
         comment.valid?
-        expect(comment.errors.full_messages).to include('内容を入力してください')
+        expect(comment.errors.full_messages).to eq ['内容を入力してください']
       end
     end
 
@@ -44,12 +44,12 @@ RSpec.describe Comment, type: :model do
       before { comment.content = nil }
 
       it 'valid?メソッドがfalseを返すこと' do
-        expect(comment).to be_invalid
+        expect(comment).not_to be_valid
       end
 
       it 'errorsに「内容を入力してください」と格納されること' do
         comment.valid?
-        expect(comment.errors.full_messages).to include('内容を入力してください')
+        expect(comment.errors.full_messages).to eq ['内容を入力してください']
       end
     end
   end
