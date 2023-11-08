@@ -30,3 +30,6 @@ ClassLength:
 # RSpec/ContextWordingを無効
 RSpec/ContextWording:
   Enabled: false
+
+Style/HashSyntax:
+  Enabled: false

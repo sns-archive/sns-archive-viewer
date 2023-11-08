@@ -4,7 +4,8 @@ ja:
       memo:
         title: タイトル
         content: コンテンツ
+      comment:
+        content: 内容
   errors:
-    models:
-      memo:
-        blank: を入力してください
+    messages:
+      blank: を入力してください
