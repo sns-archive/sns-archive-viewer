@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class MemosController < ApplicationController
+  # POST /memos
   def create
     memo = Memo.new(memo_params)
     if memo.save
