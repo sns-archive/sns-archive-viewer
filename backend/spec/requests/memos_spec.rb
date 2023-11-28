@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Memos' do
-  describe 'MemoAPI' do
+RSpec.describe 'MemosController' do
+  describe 'POST /memos' do
     context 'タイトルとコンテンツが有効な場合' do
       let(:valid_memo_params) do
         { title: Faker::Lorem.sentence(word_count: 3), content: Faker::Lorem.paragraph(sentence_count: 5) }
