@@ -28,4 +28,22 @@ RSpec.describe 'MemosController' do
       end
     end
   end
+
+  describe 'PUT /memos/:id' do
+    context 'タイトルとコンテンツが有効な場合' do
+      let(:update_memo_params) { { content: '新しいコンテンツ' } }
+      let(:existing_memo) { create(:memo) }
+
+      it 'memoが更新され、204になる' do
+        aggregate_failures do
+          put "/memos/#{existing_memo.id}", params: { memo: update_memo_params }
+          expect(response).to have_http_status(:no_content)
+          existing_memo.reload
+          expect(existing_memo.content).to eq('新しいコンテンツ')
+        end
+      end
+    end
+
+    context 'バリデーションエラーになる場合'
+  end
 end
