@@ -33,3 +33,6 @@ RSpec/ContextWording:
 
 Style/HashSyntax:
   Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
