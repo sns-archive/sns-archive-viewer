@@ -32,11 +32,11 @@ RSpec.describe 'MemosController' do
   describe 'PUT /memos/:id' do
     context 'コンテンツが有効な場合' do
       let(:existing_memo) { create(:memo) }
-      let(:update_memo_params) { { content: '新しいコンテンツ' } }
+      let(:params) { { content: '新しいコンテンツ' } }
 
       it 'memoが更新され、204になる' do
         aggregate_failures do
-          put "/memos/#{existing_memo.id}", params: { memo: update_memo_params }
+          put "/memos/#{existing_memo.id}", params: { memo: params }
           expect(response).to have_http_status(:no_content)
           existing_memo.reload
           expect(existing_memo.content).to eq('新しいコンテンツ')
@@ -46,11 +46,11 @@ RSpec.describe 'MemosController' do
 
     context 'バリデーションエラーになる場合' do
       let(:existing_memo) { create(:memo) }
-      let(:invalid_params) { { content: '' } }
+      let(:params) { { content: '' } }
 
       it '422になり、エラーメッセージがレスポンスとして返る' do
         aggregate_failures do
-          put "/memos/#{existing_memo.id}", params: { memo: invalid_params }
+          put "/memos/#{existing_memo.id}", params: { memo: params }
           existing_memo.reload
           expect(response).to have_http_status(:unprocessable_entity)
           expect(response.parsed_body['errors']).to eq(['コンテンツを入力してください'])
@@ -61,11 +61,11 @@ RSpec.describe 'MemosController' do
 
   context 'タイトルを更新しようとした場合' do
     let(:existing_memo) { create(:memo) }
-    let(:invalid_params) { { title: '新しいタイトル' } }
+    let(:params) { { title: '新しいタイトル' } }
 
     it 'タイトルが変更されていないことを確認する' do
       aggregate_failures do
-        put "/memos/#{existing_memo.id}", params: { memo: invalid_params }
+        put "/memos/#{existing_memo.id}", params: { memo: params }
         expect(response).to have_http_status(:no_content)
         existing_memo.reload
         expect(existing_memo.title).not_to eq('新しいタイトル')
