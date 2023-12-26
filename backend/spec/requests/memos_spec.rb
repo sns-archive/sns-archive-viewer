@@ -72,4 +72,17 @@ RSpec.describe 'MemosController' do
       end
     end
   end
+
+  describe 'DELETE /memos/:id' do
+    context 'メモを削除しようとした場合' do
+      let!(:existing_memo) { create(:memo) }
+
+      it 'メモを削除されたことを確認する' do
+        aggregate_failures do
+          expect { delete "/memos/#{existing_memo.id}" }.to change(Memo, :count).by(-1)
+          expect(response).to have_http_status(:no_content)
+        end
+      end
+    end
+  end
 end
