@@ -4,11 +4,11 @@
 #
 # Table name: comments
 #
-#  id                                  :bigint           not null, primary key
-#  content(コメントの内容)             :text(65535)      not null
-#  created_at                          :datetime         not null
-#  updated_at                          :datetime         not null
-#  memo_id(コメントが参照するメモのID) :integer          not null
+#  id              :bigint           not null, primary key
+#  content(内容)   :text(65535)      not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  memo_id(メモID) :integer          not null
 #
 # Indexes
 #

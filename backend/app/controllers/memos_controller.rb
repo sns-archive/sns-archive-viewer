@@ -26,6 +26,8 @@ class MemosController < ApplicationController
     memo = Memo.find(params[:id])
     memo.destroy
     head :no_content
+  rescue ActiveRecord::RecordNotFound => e
+    render json: { message: e.message }, status: :not_found
   end
 
   private
