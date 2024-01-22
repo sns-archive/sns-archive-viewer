@@ -88,7 +88,7 @@ RSpec.describe 'MemosController' do
     context '存在しないメモを削除しようとした場合' do
       it '404が返ることを確認する' do
         aggregate_failures do
-          expect { delete '/memos/999' }.not_to change(Memo, :count)
+          expect { delete '/memos/0' }.not_to change(Memo, :count)
           expect(response).to have_http_status(:not_found)
         end
       end
