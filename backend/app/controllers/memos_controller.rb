@@ -2,6 +2,7 @@
 
 class MemosController < ApplicationController
   before_action :find_memo, only: %i[show update destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   # GET /memos
   def index
@@ -37,11 +38,13 @@ class MemosController < ApplicationController
   def destroy
     @memo.destroy
     head :no_content
-  rescue ActiveRecord::RecordNotFound => e
-    render json: { message: e.message }, status: :not_found
   end
 
   private
+
+  def record_not_found(exception)
+    render json: { error: exception.message }, status: :not_found
+  end
 
   def find_memo
     @memo = Memo.find(params[:id])

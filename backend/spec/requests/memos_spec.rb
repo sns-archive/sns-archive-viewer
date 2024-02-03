@@ -1,6 +1,41 @@
 # frozen_string_literal: true
 
 RSpec.describe 'MemosController' do
+  describe 'GET /memos' do
+    context 'メモが存在する場合' do
+      before { create_list(:memo, 3) }
+
+      it '全てのメモが取得できることを確認する' do
+        aggregate_failures do
+          get '/memos'
+          expect(response).to have_http_status(:ok)
+          expect(response.parsed_body['memos'].length).to eq(3)
+        end
+      end
+    end
+  end
+
+  describe 'GET /memos/:id' do
+    context 'メモが存在する場合' do
+      let!(:memo) { create(:memo) }
+
+      it '指定したメモが取得できることを確認する' do
+        aggregate_failures do
+          get "/memos/#{memo.id}"
+          expect(response).to have_http_status(:ok)
+          expect(response.parsed_body['memo']['id']).to eq(memo.id)
+        end
+      end
+    end
+
+    context '存在しないメモを取得しようとした場合' do
+      it '404が返ることを確認する' do
+        get '/memos/0'
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+  end
+
   describe 'POST /memos' do
     context 'タイトルとコンテンツが有効な場合' do
       let(:valid_memo_params) do
