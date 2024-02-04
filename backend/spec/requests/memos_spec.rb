@@ -3,13 +3,16 @@
 RSpec.describe 'MemosController' do
   describe 'GET /memos' do
     context 'メモが存在する場合' do
-      before { create_list(:memo, 3) }
+      let!(:memos) { create_list(:memo, 3) }
 
-      it '全てのメモが取得できることを確認する' do
+      it '全てのメモが取得でき降順で並び変えられていることを確認する' do
         aggregate_failures do
           get '/memos'
           expect(response).to have_http_status(:ok)
           expect(response.parsed_body['memos'].length).to eq(3)
+          result_memo_ids = response.parsed_body['memos'].map { _1['id'] }
+          expected_memo_ids = memos.reverse.map(&:id)
+          expect(result_memo_ids).to eq(expected_memo_ids)
         end
       end
     end

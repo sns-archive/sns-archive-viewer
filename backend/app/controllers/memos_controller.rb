@@ -43,10 +43,6 @@ class MemosController < ApplicationController
 
   private
 
-  def record_not_found(exception)
-    render json: { error: exception.message }, status: :not_found
-  end
-
   def memo_params
     params.require(:memo).permit(:title, :content)
   end
