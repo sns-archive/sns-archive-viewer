@@ -3,7 +3,7 @@
 class MemosController < ApplicationController
   # GET /memos
   def index
-    memos = Memo.all.order(id: 'DESC')
+    memos = Memo.order(id: 'DESC')
     render json: { memos: memos }, status: :ok
   end
 
