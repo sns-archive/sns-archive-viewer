@@ -21,12 +21,17 @@ RSpec.describe 'MemosController' do
   describe 'GET /memos/:id' do
     context 'メモが存在する場合' do
       let!(:memo) { create(:memo) }
+      let!(:comments) { create_list(:comment, 3, memo: memo) }
 
       it '指定したメモが取得できることを確認する' do
         aggregate_failures do
           get "/memos/#{memo.id}"
           expect(response).to have_http_status(:ok)
           expect(response.parsed_body['memo']['id']).to eq(memo.id)
+          expect(response.parsed_body['comments'].length).to eq(3)
+          result_comment_ids = response.parsed_body['comments'].map { _1['id'] }
+          expected_comments_ids = comments.reverse.map(&:id)
+          expect(result_comment_ids).to eq(expected_comments_ids)
         end
       end
     end
