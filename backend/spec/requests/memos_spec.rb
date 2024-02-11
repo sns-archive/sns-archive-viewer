@@ -23,7 +23,7 @@ RSpec.describe 'MemosController' do
       let!(:memo) { create(:memo) }
       let!(:comments) { create_list(:comment, 3, memo: memo) }
 
-      it '指定したメモが取得できることを確認する' do
+      it '指定したメモ、コメントが取得できることを確認する' do
         aggregate_failures do
           get "/memos/#{memo.id}"
           expect(response).to have_http_status(:ok)
