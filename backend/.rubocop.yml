@@ -36,6 +36,3 @@ Style/HashSyntax:
 
 RSpec/ExampleLength:
   Enabled: false
-
-Rails/Pluck:
-  Enabled: false

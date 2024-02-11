@@ -10,7 +10,7 @@ RSpec.describe 'MemosController' do
           get '/memos'
           expect(response).to have_http_status(:ok)
           expect(response.parsed_body['memos'].length).to eq(3)
-          result_memo_ids = response.parsed_body['memos'].map { _1['id'] }
+          result_memo_ids = response.parsed_body['memos'].map { _1['id'] } # rubocop:disable Rails/Pluck
           expected_memo_ids = memos.reverse.map(&:id)
           expect(result_memo_ids).to eq(expected_memo_ids)
         end
@@ -29,7 +29,7 @@ RSpec.describe 'MemosController' do
           expect(response).to have_http_status(:ok)
           expect(response.parsed_body['memo']['id']).to eq(memo.id)
           expect(response.parsed_body['comments'].length).to eq(3)
-          result_comment_ids = response.parsed_body['comments'].map { _1['id'] }
+          result_comment_ids = response.parsed_body['comments'].map { _1['id'] } # rubocop:disable Rails/Pluck
           expected_comments_ids = comments.reverse.map(&:id)
           expect(result_comment_ids).to eq(expected_comments_ids)
         end
