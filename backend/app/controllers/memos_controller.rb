@@ -9,9 +9,9 @@ class MemosController < ApplicationController
 
   # GET /memos/:id
   def show
-    memo = Memo.find(params[:id])
-    comments = memo.comments.order(id: 'DESC')
-    render json: { memo: memo, comments: comments }, status: :ok
+    @memo = Memo.find(params[:id])
+    @comments = @memo.comments.order(id: 'DESC')
+    render 'show', status: :ok
   end
 
   # POST /memos

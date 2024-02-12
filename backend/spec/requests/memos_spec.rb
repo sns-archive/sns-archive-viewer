@@ -25,11 +25,11 @@ RSpec.describe 'MemosController' do
 
       it '指定したメモ、コメントが取得できることを確認する' do
         aggregate_failures do
-          get "/memos/#{memo.id}"
+          get "/memos/#{memo.id}", headers: { Accept: 'application/json' }
           expect(response).to have_http_status(:ok)
           expect(response.parsed_body['memo']['id']).to eq(memo.id)
-          expect(response.parsed_body['comments'].length).to eq(3)
-          result_comment_ids = response.parsed_body['comments'].map { _1['id'] } # rubocop:disable Rails/Pluck
+          expect(response.parsed_body['memo']['comments'].length).to eq(3)
+          result_comment_ids = response.parsed_body['memo']['comments'].map { _1['id'] } # rubocop:disable Rails/Pluck
           expected_comments_ids = comments.reverse.map(&:id)
           expect(result_comment_ids).to eq(expected_comments_ids)
         end
