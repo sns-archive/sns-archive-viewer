@@ -1,6 +1,19 @@
 # frozen_string_literal: true
 
 class MemosController < ApplicationController
+  # GET /memos
+  def index
+    memos = Memo.order(id: 'DESC')
+    render json: { memos: memos }, status: :ok
+  end
+
+  # GET /memos/:id
+  def show
+    @memo = Memo.find(params[:id])
+    @comments = @memo.comments.order(id: 'DESC')
+    render 'show', status: :ok
+  end
+
   # POST /memos
   def create
     memo = Memo.new(memo_params)
@@ -14,6 +27,7 @@ class MemosController < ApplicationController
   # PUT /memos/:id
   def update
     memo = Memo.find(params[:id])
+
     if memo.update(update_memo_params)
       head :no_content
     else
@@ -26,8 +40,6 @@ class MemosController < ApplicationController
     memo = Memo.find(params[:id])
     memo.destroy
     head :no_content
-  rescue ActiveRecord::RecordNotFound => e
-    render json: { message: e.message }, status: :not_found
   end
 
   private
