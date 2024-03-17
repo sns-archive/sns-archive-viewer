@@ -1,37 +1,41 @@
-get:
-  tags:
-    - メモ
-  summary: メモ一覧取得
-  responses:
-    '200':
-      description: OK
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
+paths:
+  /memos:
+    get:
+      tags:
+        - メモ
+      summary: メモ一覧取得
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  memos:
+                    type: array
+                    items:
+                      $ref: '../components/memoSchema.yml#/components/schemas/memo'
+    post:
+      tags:
+        - メモ
+      summary: メモ作成
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
               $ref: '../components/memoSchema.yml#/components/schemas/memo'
-post:
-  tags:
-    - メモ
-  summary: メモ作成
-  requestBody:
-    required: true
-    content:
-      application/json:
-        schema:
-          $ref: '../components/memoSchema.yml#/components/schemas/memo'
-      required: true
-  responses:
-    '204' :
-      description: No Content
-    '422':
-      description: Unprocessable Entity
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              message:
-                type: string
-                example: "error message"
+      responses:
+        '204' :
+          description: No Content
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "error message"

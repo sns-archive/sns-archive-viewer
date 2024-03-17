@@ -11,5 +11,6 @@ json.memo do
     json.id comment.id
     json.content comment.content
     json.created_at comment.created_at
+    json.memo_id comment.memo_id
   end
 end

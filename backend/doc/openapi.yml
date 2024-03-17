@@ -11,6 +11,6 @@ tags:
 
 paths:
   /memos:
-    $ref: './paths/memo.yml'
+    $ref: './paths/memo.yml#/paths/~1memos'
   /memos/{memoId}:
-    $ref: './paths/memoId.yml'
+    $ref: './paths/memoId.yml#/paths/~1memos~1{memoId}'

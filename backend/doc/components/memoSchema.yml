@@ -13,6 +13,23 @@ components:
         content:
           type: string
           example: メモの内容
+        created_at:
+          type: string
+          format: date-time
+          example: 2021-01-01T00:00:00.000Z
+        updated_at:
+          type: string
+          format: date-time
+          example: 2021-01-01T00:00:00.000Z
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/comment'
+      required:
+        - id
+        - title
+        - content
+      additionalProperties: false
     comment:
       type: object
       properties:
@@ -20,10 +37,19 @@ components:
           type: integer
           format: int64
           example: 1
-        memoId:
+        memo_id:
           type: integer
           format: int64
           example: 1
         content:
           type: string
           example: コメントの内容
+        created_at:
+          type: string
+          format: date-time
+          example: 2021-01-01T00:00:00.000Z
+      required:
+        - memo_id
+        - content
+        - created_at
+      additionalProperties: false
