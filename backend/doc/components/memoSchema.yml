@@ -1,0 +1,29 @@
+components:
+  schemas:
+    memo:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        title:
+          type: string
+          example: メモのタイトル
+        content:
+          type: string
+          example: メモの内容
+    comment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        memoId:
+          type: integer
+          format: int64
+          example: 1
+        content:
+          type: string
+          example: コメントの内容
