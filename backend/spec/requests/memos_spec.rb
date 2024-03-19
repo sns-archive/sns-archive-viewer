@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.describe 'MemosController' do
-
   describe 'GET /memos' do
     context 'メモが存在する場合' do
       let!(:memos) { create_list(:memo, 3) }
@@ -9,6 +8,7 @@ RSpec.describe 'MemosController' do
       it '全てのメモが取得でき降順で並び変えられていることを確認する' do
         aggregate_failures do
           get '/memos'
+          expect(response).to have_http_status(:ok)
           assert_response_schema_confirm(200)
           expect(response.parsed_body['memos'].length).to eq(3)
           result_memo_ids = response.parsed_body['memos'].map { _1['id'] } # rubocop:disable Rails/Pluck
@@ -27,6 +27,7 @@ RSpec.describe 'MemosController' do
       it '指定したメモ、コメントが取得できることを確認する' do
         aggregate_failures do
           get "/memos/#{memo.id}", headers: { Accept: 'application/json' }
+          expect(response).to have_http_status(:ok)
           assert_response_schema_confirm(200)
           expect(response.parsed_body['memo']['id']).to eq(memo.id)
           expect(response.parsed_body['memo']['comments'].length).to eq(3)
@@ -41,6 +42,7 @@ RSpec.describe 'MemosController' do
       it '404が返ることを確認する' do
         get '/memos/0'
         expect(response).to have_http_status(:not_found)
+        assert_response_schema_confirm(404)
       end
     end
   end
@@ -53,8 +55,10 @@ RSpec.describe 'MemosController' do
 
       it 'memoレコードが追加され、204になる' do
         aggregate_failures do
-          expect { post '/memos', params: { memo: valid_memo_params } }.to change(Memo, :count).by(+1)
+          expect { post '/memos', params: { memo: valid_memo_params }, as: :json }.to change(Memo, :count).by(+1)
+          assert_request_schema_confirm
           expect(response).to have_http_status(:no_content)
+          assert_response_schema_confirm(204)
           expect(response.body).to be_empty
         end
       end
@@ -65,8 +69,10 @@ RSpec.describe 'MemosController' do
 
       it '422になり、エラーメッセージがレスポンスとして返る' do
         aggregate_failures do
-          post '/memos', params: { memo: empty_memo_params }
+          post '/memos', params: { memo: empty_memo_params }, as: :json
+          assert_request_schema_confirm
           expect(response).to have_http_status(:unprocessable_entity)
+          assert_response_schema_confirm(422)
           expect(response.parsed_body['errors']).to eq(%w[タイトルを入力してください コンテンツを入力してください])
         end
       end
@@ -80,8 +86,10 @@ RSpec.describe 'MemosController' do
 
       it 'memoが更新され、204になる' do
         aggregate_failures do
-          put "/memos/#{existing_memo.id}", params: { memo: params }
+          put "/memos/#{existing_memo.id}", params: { memo: params }, as: :json
+          assert_request_schema_confirm
           expect(response).to have_http_status(:no_content)
+          assert_response_schema_confirm(204)
           existing_memo.reload
           expect(existing_memo.content).to eq('新しいコンテンツ')
         end
@@ -94,9 +102,11 @@ RSpec.describe 'MemosController' do
 
       it '422になり、エラーメッセージがレスポンスとして返る' do
         aggregate_failures do
-          put "/memos/#{existing_memo.id}", params: { memo: params }
+          put "/memos/#{existing_memo.id}", params: { memo: params }, as: :json
+          assert_request_schema_confirm
           existing_memo.reload
           expect(response).to have_http_status(:unprocessable_entity)
+          assert_response_schema_confirm(422)
           expect(response.parsed_body['errors']).to eq(['コンテンツを入力してください'])
         end
       end
@@ -109,9 +119,11 @@ RSpec.describe 'MemosController' do
 
     it 'タイトルが変更されていないことを確認する' do
       aggregate_failures do
-        put "/memos/#{existing_memo.id}", params: { memo: params }
+        put "/memos/#{existing_memo.id}", params: { memo: params }, as: :json
+        assert_request_schema_confirm
         expect(response).to have_http_status(:no_content)
         existing_memo.reload
+        assert_response_schema_confirm(204)
         expect(existing_memo.title).not_to eq('新しいタイトル')
       end
     end
@@ -124,7 +136,9 @@ RSpec.describe 'MemosController' do
       it 'メモを削除されたことを確認する' do
         aggregate_failures do
           expect { delete "/memos/#{existing_memo.id}" }.to change(Memo, :count).by(-1)
+          assert_request_schema_confirm
           expect(response).to have_http_status(:no_content)
+          assert_response_schema_confirm(204)
         end
       end
     end
@@ -133,7 +147,9 @@ RSpec.describe 'MemosController' do
       it '404が返ることを確認する' do
         aggregate_failures do
           expect { delete '/memos/0' }.not_to change(Memo, :count)
+          assert_request_schema_confirm
           expect(response).to have_http_status(:not_found)
+          assert_response_schema_confirm(404)
         end
       end
     end

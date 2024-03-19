@@ -18,6 +18,16 @@ paths:
                 properties:
                   memo:
                     $ref: '../components/memoSchema.yml#/components/schemas/memo'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "error message"
     put:
       tags:
         - メモ

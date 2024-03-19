@@ -25,7 +25,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '../components/memoSchema.yml#/components/schemas/memo'
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: メモのタイトル
+                content:
+                  type: string
+                  example: メモの内容
       responses:
         '204' :
           description: No Content
