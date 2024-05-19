@@ -1,0 +1,82 @@
+paths:
+  /memos/{memoId}:
+    get:
+      tags:
+        - メモ
+      summary: メモ取得
+      parameters:
+        - name: memoId
+          in: path
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  memo:
+                    $ref: '../components/memoSchema.yml#/components/schemas/memo'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "error message"
+    put:
+      tags:
+        - メモ
+      summary: メモ更新
+      parameters:
+        - name: memoId
+          in: path
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  example: メモの内容
+      responses:
+        '204':
+          description: No Content
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "error message"
+    delete:
+      tags:
+        - メモ
+      summary: メモ削除
+      parameters:
+        - name: memoId
+          in: path
+          required: true
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "error message"
