@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - docs/swagger/**
+      - backend/doc/**
       - .github/workflows/gh_pages_deploy.yml
   workflow_dispatch:
 
@@ -32,8 +32,16 @@ jobs:
       - name: Copy Swagger static files
         run: |
           wget https://github.com/swagger-api/swagger-ui/archive/refs/tags/v5.11.8.tar.gz
-          tar -zxvf v5.11.8.tar.gz swagger-ui-5.11.8/dist/
-          cp -n swagger-ui-5.11.8/dist/* docs/swagger/
+          tar -zxvf v5.11.8.tar.gz
+          mkdir -p docs/swagger
+          cp -r swagger-ui-5.11.8/dist/* docs/swagger/
+
+      - name: Copy OpenAPI file
+        run: |
+          cp backend/doc/openapi.yml docs/swagger/openapi.yaml
+
+      - name: Update Swagger UI configuration
+        run: |
           sed -i 's|https://petstore.swagger.io/v2/swagger.json|./openapi.yaml|' docs/swagger/swagger-initializer.js
 
       - name: Deploy
