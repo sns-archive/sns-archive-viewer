@@ -1,0 +1,56 @@
+name: Deploy Swagger UI to Page
+on:
+  pull_request:
+    paths:
+      - backend/doc/**
+      - .github/workflows/deploy_openapi.yml
+  workflow_dispatch:
+
+jobs:
+  swagger-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install swagger-cli
+        run: npm install -g swagger-cli
+
+      - name: Validate swagger files
+        run: swagger-cli validate -d ./backend/doc/openapi.yml --type yaml --format 3
+
+  swagger-release:
+    needs: swagger-validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create deploy directory
+        run: mkdir -p docs/swagger
+
+      - name: Copy OpenAPI file
+        run: cp -r backend/doc/* docs/swagger/
+
+      - name: Copy Swagger static files
+        run: |
+          wget https://github.com/swagger-api/swagger-ui/archive/refs/tags/v5.11.8.tar.gz
+          tar -zxvf v5.11.8.tar.gz
+          cp -r swagger-ui-5.11.8/dist/* docs/swagger/
+          sed -i 's|https://petstore.swagger.io/v2/swagger.json|./openapi.yml|' docs/swagger/swagger-initializer.js
+
+      - name: Upload artifact for deployment
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: docs/swagger
+
+  deploy:
+    needs: swagger-release
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
