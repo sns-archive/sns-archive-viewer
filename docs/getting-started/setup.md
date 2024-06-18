@@ -148,5 +148,6 @@ docker compose ps
 データベースとバックエンドの両方のコンテナが起動していることを確認します。
 
 ## 5. 確認
+<img width="1265" alt="スクリーンショット 2024-06-18 20 35 35" src="https://github.com/Progaku-copy/progaku-archive/assets/115006129/cd3a44f0-594a-4ebd-8625-a9dc15f5b143">
 
 ブラウザで `localhost:3000` を入力し、Railsのウェルカムページが表示されれば環境構築は成功です。
