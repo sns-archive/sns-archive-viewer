@@ -119,6 +119,24 @@ Created database 'app_development'
 Created database 'app_test'
 ```
 
+次に、スキーマファイルを使用してテーブルを作成します。以下のコマンドを実行します。
+
+```bash
+docker compose run backend rake ridgepole:apply
+```
+テーブルの作成が成功すると以下のような出力が表示されます。
+
+```plaintext
+-- create_table("users", {:charset=>"utf8mb4", :collation=>"utf8mb4_0900_ai_ci"})
+   -> 0.0457s
+-- create_table("memos", {:charset=>"utf8mb4", :collation=>"utf8mb4_0900_ai_ci"})
+   -> 0.0152s
+-- create_table("comments", {:charset=>"utf8mb4", :collation=>"utf8mb4_0900_ai_ci"})
+   -> 0.0149s
+-- add_index("comments", ["memo_id"], {:name=>"index_comments_on_memo_id"})
+   -> 0.0874s
+```
+
 ## 4. コンテナを起動
 
 以下のコマンドでコンテナを起動します。
