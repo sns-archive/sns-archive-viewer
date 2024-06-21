@@ -32,7 +32,7 @@ ls
 
 ## 2. データベースのenvファイルを作成する
 
-Dockerのコンテナを起動する前に、データベース接続に必要な情報を含む環境変数の設定ファイルを作成する必要があります。`docker-compose.yml` の `env_file` セクションに指定された場所で読み込まれます。
+Dockerのコンテナを起動する前に、データベース接続に必要な情報を含む環境変数の設定ファイルを作成する必要があります。`docker-compose.yml` の `env_file` に指定された場所で読み込まれます。
 
 ```yaml
 env_file:
@@ -119,6 +119,24 @@ Created database 'app_development'
 Created database 'app_test'
 ```
 
+次に、スキーマファイルを使用してテーブルを作成します。以下のコマンドを実行します。
+
+```bash
+docker compose run backend rake ridgepole:apply
+```
+テーブルの作成が成功すると以下のような出力が表示されます。
+
+```plaintext
+-- create_table("users", {:charset=>"utf8mb4", :collation=>"utf8mb4_0900_ai_ci"})
+   -> 0.0457s
+-- create_table("memos", {:charset=>"utf8mb4", :collation=>"utf8mb4_0900_ai_ci"})
+   -> 0.0152s
+-- create_table("comments", {:charset=>"utf8mb4", :collation=>"utf8mb4_0900_ai_ci"})
+   -> 0.0149s
+-- add_index("comments", ["memo_id"], {:name=>"index_comments_on_memo_id"})
+   -> 0.0874s
+```
+
 ## 4. コンテナを起動
 
 以下のコマンドでコンテナを起動します。
@@ -148,5 +166,6 @@ docker compose ps
 データベースとバックエンドの両方のコンテナが起動していることを確認します。
 
 ## 5. 確認
+<img width="1265" alt="スクリーンショット 2024-06-18 20 35 35" src="https://github.com/Progaku-copy/progaku-archive/assets/115006129/cd3a44f0-594a-4ebd-8625-a9dc15f5b143">
 
 ブラウザで `localhost:3000` を入力し、Railsのウェルカムページが表示されれば環境構築は成功です。
