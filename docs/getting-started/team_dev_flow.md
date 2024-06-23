@@ -68,6 +68,43 @@ docs/#46-dev-flow-docs
 bin/backend/check_test_and_lint
 ```
 
+## commitを行う
+動作確認ができたらコミットを行います。
+
+基本的なコミットの流れは以下の通りです。
+### 1. ステージングに乗せる
+```
+git add [対象のファイル]
+```
+**例:今作成している、ドキュメントファイルをステージングに乗せる場合**
+```
+git add docs/getting-started/team_dev_flow.md
+```
+
+### 2. コミットする
+```
+git commit -m [コミットメッセージ]
+```
+
+### 補足
+今、何のファイルに変更が加わっているのか、ステージングに乗っているファイルは何か等、現在の状態は以下のコマンドで確認できます
+```
+git status
+```
+
+例えば以下のような情報を教えてくれます
+```
+git status
+On branch docs/#46-dev-flow-docs   ⇦  現在のブランチ名
+Your branch is ahead of 'origin/docs/#46-dev-flow-docs' by 1 commit.
+  (use "git push" to publish your local commits) ⇦ リモートのブランチより1つコミットが進んでいる
+
+Changes not staged for commit:  ⇦ 変更がステージングされてない
+  (use "git add <file>..." to update what will be committed) ⇦ステージングに乗せる方法
+  (use "git restore <file>..." to discard changes in working directory) ⇦変更を破棄する方法
+	modified:   docs/getting-started/team_dev_flow.md. ⇦  変更したファイル名
+```
+
 ## pushを行う
 
 タスクの実装とテストが完了したら、リモートリポジトリに変更をプッシュします。以下の手順に従ってプッシュを行ってください。
