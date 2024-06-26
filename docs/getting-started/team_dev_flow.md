@@ -46,11 +46,12 @@ docs/#46-dev-flow-docs
 > マイルストーンとは？
  マイルストーンとは、プロジェクト管理における重要な節目や目標のこと。プロジェクトの進行状況等を完了を確認するために設定される
 
-自身で作業の見積もりを立てていただき、issueのコメント欄にタスク完了の期日を記載してください。
-設定した期日を目標に取り組んでいただくことになります。
-```
-例: 完了予定日 2024年6月29日
-```
+GitHubのマイルストーンについては[こちら](https://docs.github.com/ja/issues/using-labels-and-milestones-to-track-work/filtering-issues-and-pull-requests-by-milestone)を参照してください
+
+上記のマイルストーンの機能を使用し、自身で作業の見積もりを立てていただき、期限日の設定をし、issueに紐付けてください。
+以下の方法でも作成することができます。
+
+issueの右側にあるMilestoneという項目をクリック ⇨ 表示されるテキストボックスにMilestone名を入力　⇨「Create and assign to new milestone」をクリック ⇨ Milestoneに作成したMilestoneが表示されるのでクリック→ 作成したMilestoneにチェックを入れて「Edit Milestone」をクリック→ 期日を設定し保存
 
 ## タスクに取り組む
 マイルストーンを設定したら、issueの内容を元にタスクに取り組みます。
