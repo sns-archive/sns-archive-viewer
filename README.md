@@ -18,4 +18,4 @@
 バックエンド環境のセットアップ方法は[こちら](./docs/getting-started/setup.md)を参照してください。
 
 ## 開発フロー
-基本的な開発のフローについては[こちら](./docs/team_dev_flow.md)を参照してください。
+基本的な開発のフローについては[こちら](./docs/getting-started/team_dev_flow.md)を参照してください。
