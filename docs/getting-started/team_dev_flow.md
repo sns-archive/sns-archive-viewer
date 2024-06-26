@@ -6,18 +6,18 @@
 issueにassignしたらまずブランチを作成します。
 
 1. mainブランチに切り替え
-```
-git switch main
+```bash
+$ git switch main
 ```
 
 2. mainブランチを最新の状態にします。
-```
-git pull origin main
+```bash
+$ git pull origin main
 ```
 
 3. mainブランチからブランチを作成
-```
-git switch -c [ブランチ名]
+```bash
+$ git switch -c [ブランチ名]
 ```
 
 ### ブランチの命名
@@ -68,8 +68,8 @@ issueの右側にあるMilestoneという項目をクリック ⇨ 表示され�
 
 尚以下のスクリプトを実行することで、Rspec、rubocopどちらも実行し、確認することができます。
 
-```
-bin/backend/check_test_and_lint
+```bash
+$ bin/backend/check_test_and_lint
 ```
 
 ## commitを行う
@@ -77,28 +77,28 @@ bin/backend/check_test_and_lint
 
 基本的なコミットの流れは以下の通りです。
 ### 1. ステージングに乗せる
-```
-git add [対象のファイル]
+```bash
+$ git add [対象のファイル]
 ```
 **例:今作成している、ドキュメントファイルをステージングに乗せる場合**
-```
-git add docs/getting-started/team_dev_flow.md
+```bash
+$ git add docs/getting-started/team_dev_flow.md
 ```
 
 ### 2. コミットする
-```
-git commit -m [コミットメッセージ]
+```bash
+$ git commit -m [コミットメッセージ]
 ```
 
 ### 補足
 今、何のファイルに変更が加わっているのか、ステージングに乗っているファイルは何か等、現在の状態は以下のコマンドで確認できます
-```
-git status
+```bash
+$ git status
 ```
 
 例えば以下のような情報を教えてくれます
-```
-git status
+```bash
+$ git status
 On branch docs/#46-dev-flow-docs   ⇦  現在のブランチ名
 Your branch is ahead of 'origin/docs/#46-dev-flow-docs' by 1 commit.
   (use "git push" to publish your local commits) ⇦ リモートのブランチより1つコミットが進んでいる
@@ -115,21 +115,21 @@ Changes not staged for commit:  ⇦ 変更がステージングされてない
 
 ### 1. 変更内容のステージング
 まず、作業ディレクトリ内の変更をステージングします。
-```
-git add [ファイル名]
+```bash
+$ git add [ファイル名]
 ```
 
 ### 2. 変更内容のコミット
 次に、ステージングされた変更をコミットします。コミットメッセージには、変更内容がわかるように記述してください。
-```
-git commit -m "コミットメッセージ"
+```bash
+$ git commit -m "コミットメッセージ"
 ```
 
 ### 3. リモートリポジトリにプッシュ
 最後に、リモートリポジトリにプッシュします。
 
-```
-git push origin [ブランチ名]
+```bash
+$ git push origin [ブランチ名]
 ```
 
 ## プルリクエストを作成
@@ -156,13 +156,13 @@ git push origin [ブランチ名]
 最後に、マージした内容をローカルのメインブランチに反映します。
 
 メインブランチに切り替え
-```
-git switch main
+```bash
+$ git switch main
 ```
 
 ローカルにpull
-```
-git pull origin main
+```bash
+$ git pull origin main
 ```
 
 以上になります。
