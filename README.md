@@ -5,7 +5,7 @@
 全てのドキュメントは[こちら](/docs/)から参照できます。
 
 ### バックエンド関連
-- [CIの設定](docs/backend/ci.md)
+- [バックエンドのCIの詳細について](docs/backend/ci.md)
 - [データベース（マイグレーションなど）の使用方法](docs/backend/database.md)
 - [RSpecとFactoryBotの使用方法](docs/backend/Rspec_FactoryBot.md)
 - [Rubocopの使用方法](docs/backend/rubocop.md)
@@ -16,3 +16,6 @@
 
 ## バックエンド環境のセットアップ
 バックエンド環境のセットアップ方法は[こちら](./docs/getting-started/setup.md)を参照してください。
+
+## 開発フロー
+基本的な開発のフローについては[こちら](./docs/team_dev_flow.md)を参照してください。
