@@ -6,19 +6,23 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+require "faker"
+
 10.times do |n|
     User.create!(
-        email: "example_#{n+1}@example.com",
-        password: "password"
+        # email: "example_#{n+1}@example.com",
+        email: Faker::Internet.unique.email,
+        password: Faker::Internet.password(min_length: 8)
     )
 
-    Memo.create!(
-        title: "title_#{n+1}",
-        content: "content_#{n+1}"
+    memo = Memo.create!(
+        title: Faker::Lorem.sentence(word_count:5),
+        content: Faker::Lorem.sentence(word_count:5)
     )
-
-    Comment.create!(
-        memo_id: n+1,
-        content: "content_#{n+1}"
-    )
+    10.times do |m|
+        Comment.create!(
+            memo_id: memo.id,
+            content: "comment_#{m+1} for #{memo.title}"
+        )            
+    end
 end
