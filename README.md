@@ -19,3 +19,6 @@
 
 ## 開発フロー
 基本的な開発のフローについては[こちら](./docs/getting-started/team_dev_flow.md)を参照してください。
+
+## API仕様書
+API仕様書のリンクは[こちら](https://docs.google.com/spreadsheets/d/1-z_AKDod7YUj0z1a4ckd5w_tSKDlEIIO3Tq8wv4HPrM/edit?usp=sharing)の【API仕様書】シート参照
