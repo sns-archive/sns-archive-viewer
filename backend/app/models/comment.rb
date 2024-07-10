@@ -5,7 +5,7 @@
 # Table name: comments
 #
 #  id              :bigint           not null, primary key
-#  content(内容)   :text(65535)      not null
+#  content(内容)   :string(1024)      not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  memo_id(メモID) :integer          not null
