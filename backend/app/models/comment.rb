@@ -15,6 +15,6 @@
 #  index_comments_on_memo_id  (memo_id)
 #
 class Comment < ApplicationRecord
-  validates :content, presence: true
+  validates :content, presence: true, length: { maximum: 1024 }
   belongs_to :memo
 end
