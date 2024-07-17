@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 0) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_17_012912) do
   create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "memo_id", null: false, comment: "メモID"
+    t.bigint "memo_id", null: false, comment: "メモID"
     t.text "content", null: false, comment: "内容"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -33,4 +33,5 @@ ActiveRecord::Schema[7.0].define(version: 0) do
     t.timestamp "updated_at", null: false
   end
 
+  add_foreign_key "comments", "memos"
 end
