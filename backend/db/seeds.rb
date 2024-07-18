@@ -9,20 +9,20 @@
 require "faker"
 
 10.times do |n|
-    User.create!(
-        # email: "example_#{n+1}@example.com",
-        email: Faker::Internet.unique.email,
-        password: Faker::Internet.password(min_length: 8)
-    )
+  User.create!(
+    email: Faker::Internet.unique.email,
+    password: Faker::Internet.password(min_length: 8)
+  )
 
-    memo = Memo.create!(
-        title: Faker::Lorem.sentence(word_count:5),
-        content: Faker::Lorem.sentence(word_count:5)
-    )
-    10.times do |m|
-        Comment.create!(
-            memo_id: memo.id,
-            content: "comment_#{m+1} for #{memo.title}"
-        )            
-    end
+  memo = Memo.create!(
+    title: Faker::Lorem.sentence(word_count:10),
+    content: Faker::Lorem.paragraphs(number: 5)
+  )
+        
+  10.times do |m|
+    Comment.create!(
+    memo_id: memo.id,
+    content:  Faker::Lorem.sentence(word_count:5)
+    )            
+  end
 end
