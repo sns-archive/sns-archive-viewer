@@ -30,26 +30,41 @@ RSpec.describe Comment do
     context 'contentが空文字の場合' do
       before { comment.content = ' ' }
 
-      it 'valid?メソッドがfalseを返すこと' do
-        expect(comment).not_to be_valid
-      end
-
-      it 'errorsに「内容を入力してください」と格納されること' do
-        comment.valid?
-        expect(comment.errors.full_messages).to eq ['内容を入力してください']
+      it 'valid?メソッドがfalseを返し、errorsに「内容を入力してください」と格納されること' do
+        aggregate_failures do
+          expect(comment).not_to be_valid
+          expect(comment.errors.full_messages).to eq ['内容を入力してください']
+        end
       end
     end
 
     context 'contentがnilの場合' do
       before { comment.content = nil }
 
-      it 'valid?メソッドがfalseを返すこと' do
-        expect(comment).not_to be_valid
+      it 'valid?メソッドがfalseを返し、errorsに「内容を入力してください」と格納されること' do
+        aggregate_failures do
+          expect(comment).not_to be_valid
+          expect(comment.errors.full_messages).to eq ['内容を入力してください']
+        end
       end
+    end
 
-      it 'errorsに「内容を入力してください」と格納されること' do
-        comment.valid?
-        expect(comment.errors.full_messages).to eq ['内容を入力してください']
+    context 'contentが1025文字の場合' do
+      before { comment.content = Faker::Lorem.characters(number: 1025) }
+
+      it 'valid?メソッドがfalseを返し、errorsに「内容は1024文字以内で入力してください」と格納されること' do
+        aggregate_failures do
+          expect(comment).not_to be_valid
+          expect(comment.errors.full_messages).to eq ['内容は1024文字以内で入力してください']
+        end
+      end
+    end
+
+    context 'contentが1024文字の場合' do
+      before { comment.content = Faker::Lorem.characters(number: 1024) }
+
+      it 'valid?メソッドがtrueを返すこと' do
+        expect(comment).to be_valid
       end
     end
   end

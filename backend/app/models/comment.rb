@@ -5,7 +5,7 @@
 # Table name: comments
 #
 #  id              :bigint           not null, primary key
-#  content(内容)   :text(65535)      not null
+#  content(内容)   :string(1024)      not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  memo_id(メモID) :integer          not null
@@ -15,6 +15,6 @@
 #  index_comments_on_memo_id  (memo_id)
 #
 class Comment < ApplicationRecord
-  validates :content, presence: true
+  validates :content, presence: true, length: { maximum: 1024 }
   belongs_to :memo
 end
