@@ -12,8 +12,8 @@
 
 ActiveRecord::Schema[7.0].define(version: 0) do
   create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "memo_id", null: false, comment: "メモID"
-    t.text "content", null: false, comment: "内容"
+    t.integer "memo_id", null: false, comment: "メモID"
+    t.string "content", limit: 1024, null: false, comment: "内容"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["memo_id"], name: "index_comments_on_memo_id"
