@@ -1,11 +1,14 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'simplecov'
+require_relative 'simple_cov/formatter/branch_line_cov_formatter'
+
 SimpleCov.start 'rails' do
   add_filter '/app/channels/'
   add_filter '/app/jobs/'
   add_filter '/app/mailers/'
   enable_coverage :branch
   minimum_coverage line: 75, branch: 75
+  formatter SimpleCov::Formatter::BranchLineCovFormatter
 end
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
