@@ -83,4 +83,7 @@ group :test do
 
   # Github: https://github.com/faker-ruby/faker
   gem 'faker' # ランダムなテストデータ生成に使用
+
+  # Github: https://github.com/simplecov-ruby/simplecov
+  gem 'simplecov', require: false # テストカバレッジを取得するためのgem
 end
