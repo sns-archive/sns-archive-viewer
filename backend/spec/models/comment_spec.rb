@@ -16,7 +16,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (memo_id => memos.id)
+#  fk_comments_memo_id  (memo_id => memos.id)
 #
 RSpec.describe Comment do
   subject(:comment) { build(:comment) }
