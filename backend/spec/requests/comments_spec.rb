@@ -10,7 +10,7 @@ RSpec.describe 'CommentsController' do
         aggregate_failures do
           expect do
             post "/memos/#{memo.id}/comments", params: { comment: valid_comment_params }, as: :json
-          end.to change(memo.comments, :count).by(1)
+          end.to change(Comment, :count).by(1)
 
           expect(response).to have_http_status(:no_content)
           expect(response.body).to be_empty
