@@ -22,9 +22,11 @@ RSpec.describe 'CommentsController' do
       let(:memo) { create(:memo) }
       let(:invalid_comment_params) { { content: '' } }
 
-      it '422になり、エラーメッセージがレスポンスとして返る' do
+      it 'コメントが追加されていないこと、422になることを確認する' do
         aggregate_failures do
-          post "/memos/#{memo.id}/comments", params: { comment: invalid_comment_params }, as: :json
+          expect do
+            post "/memos/#{memo.id}/comments", params: { comment: invalid_comment_params }, as: :json
+          end.not_to change(Comment, :count)
           expect(response).to have_http_status(:unprocessable_entity)
           expect(response.parsed_body['errors']).to eq(['内容を入力してください'])
         end
