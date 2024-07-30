@@ -93,6 +93,7 @@ GEM
       reline (>= 0.3.1)
     diff-lcs (1.5.0)
     diffy (3.4.2)
+    docile (1.4.0)
     erubi (1.12.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
@@ -255,6 +256,12 @@ GEM
       rubocop-capybara (~> 2.17)
       rubocop-factory_bot (~> 2.22)
     ruby-progressbar (1.13.0)
+    simplecov (0.22.0)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.12.3)
+    simplecov_json_formatter (0.1.4)
     stringio (3.0.8)
     thor (1.2.2)
     timeout (0.4.0)
@@ -291,6 +298,7 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rails
   rubocop-rspec
+  simplecov
   tzinfo-data
 
 RUBY VERSION
