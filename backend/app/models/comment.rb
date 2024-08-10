@@ -8,11 +8,15 @@
 #  content(内容)   :string(1024)      not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  memo_id(メモID) :integer          not null
+#  memo_id(メモID) :bigint           not null
 #
 # Indexes
 #
 #  index_comments_on_memo_id  (memo_id)
+#
+# Foreign Keys
+#
+#  fk_comments_memo_id  (memo_id => memos.id)
 #
 class Comment < ApplicationRecord
   validates :content, presence: true, length: { maximum: 1024 }
