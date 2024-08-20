@@ -13,14 +13,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
+
       - name: copy backend.env.template
         run: cp infra/env/backend.env.template infra/env/backend.env
 
       - name: Build Docker image
         run: |
           docker compose build backend
-      
+
       - name: Create and Setup DB
       # MySQLコンテナが応答できるまで10秒スリープする
       # Ref: https://qiita.com/KazuyaInoue/items/758b3da37ecdf3039baf
@@ -33,6 +33,6 @@ jobs:
 
       - name: Run Rubocop
         run: docker compose run backend bundle exec rubocop
-      
+
       - name: Run Rspec
         run: docker compose run backend bundle exec rspec
