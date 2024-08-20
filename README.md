@@ -1,5 +1,6 @@
-# Progaku Archive アプリ
-このリポジトリはProgakuのアーカイブ用アプリです。
+# Slack Archive アプリ
+このリポジトリはSlackのアーカイブ用アプリです。
+無料版Slackのメッセージを移行するためのサービスをdiscordに移行したり、本サービスに移行するためのサービスになっています。
 
 ## ドキュメント一覧
 全てのドキュメントは[こちら](/docs/)から参照できます。
@@ -19,6 +20,3 @@
 
 ## 開発フロー
 基本的な開発のフローについては[こちら](./docs/getting-started/team_dev_flow.md)を参照してください。
-
-## API仕様書
-API仕様書のリンクは[こちら](https://docs.google.com/spreadsheets/d/1-z_AKDod7YUj0z1a4ckd5w_tSKDlEIIO3Tq8wv4HPrM/edit?usp=sharing)の【API仕様書】シート参照
