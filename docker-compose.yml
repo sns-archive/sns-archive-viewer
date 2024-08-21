@@ -2,7 +2,7 @@ version: "3"
 
 services:
   backend:
-    container_name: pa_backend
+    container_name: slack-archive_backend
     build:
       context: .
       dockerfile: ./infra/backend/Dockerfile
@@ -21,7 +21,7 @@ services:
   db:
     image: mysql:8.0
     platform: linux/amd64
-    container_name: pa_database
+    container_name: slack-archive_database
     volumes:
       - db-data:/var/lib/mysql
     environment:
