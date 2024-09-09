@@ -1,6 +1,15 @@
-version: "3"
-
 services:
+  frontend:
+    container_name: slack-archive_frontend
+    build:
+      context: .
+      dockerfile: ./infra/frontend/Dockerfile
+    volumes:
+      - ./frontend:/usr/src/app
+      - ./frontend/node_modules:/usr/src/app/node_modules
+    command: yarn dev -p 4000
+    ports:
+      - "4000:4000"
   backend:
     container_name: slack-archive_backend
     build:
