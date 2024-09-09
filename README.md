@@ -15,8 +15,11 @@
 - [GitとGithubの使用方法](docs/others/git_and_github.md)
 - [シェルスクリプトの説明](docs/others/shell_script.md)
 
-## バックエンド環境のセットアップ
-バックエンド環境のセットアップ方法は[こちら](./docs/getting-started/setup.md)を参照してください。
+## バックエンドの環境構築方法
+バックエンド環境のセットアップ方法は[こちら](./docs/backend/setup.md)を参照してください。
+
+## フロントエンドの環境構築方法
+フロントエンド環境のセットアップ方法は[こちら](./docs/frontend/setup.md)を参照してください。
 
 ## 開発フロー
 基本的な開発のフローについては[こちら](./docs/getting-started/team_dev_flow.md)を参照してください。
