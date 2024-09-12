@@ -23,7 +23,7 @@ jobs:
         with:
           node-version-file: "./frontend/package.json"
           cache: "yarn"
-          cache-dependency-path: "./frontend/yarn.lock.json"
+          cache-dependency-path: "./frontend/yarn.lock"
 
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
@@ -42,8 +42,5 @@ jobs:
         uses: SimenB/github-actions-cpu-cores@v2
         id: cpu-cores
 
-      - name: Run test SP
-        run: npx cross-env DEVICE=sp jest --bail --forceExit --max-workers ${{ steps.cpu-cores.outputs.count }}
-
-      - name: Run test PC
-        run: npx cross-env DEVICE=pc jest --bail --forceExit --max-workers ${{ steps.cpu-cores.outputs.count }}
+      - name: Run tests
+        run: npx jest --bail --forceExit --max-workers ${{ steps.cpu-cores.outputs.count }}
