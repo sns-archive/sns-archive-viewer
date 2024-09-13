@@ -7,13 +7,13 @@
 
 ## RSpecとFactoryBotの動作確認
 ### 0. はじめに
-- バックエンドの環境構築がまだの場合slack-archiveリポジトリのREADME.mdを読み、バックエンドの環境構築を行ってください。
+- バックエンドの環境構築がまだの場合sns-archive-viewerリポジトリのREADME.mdを読み、バックエンドの環境構築を行ってください。
 
 ### 1. コンテナに入る
-- ホストマシン上で以下のコマンドを実行し、pa_backendというサービス名のコンテナに入ってください。
+- ホストマシン上で以下のコマンドを実行し、sns-archive-viewer_backendというサービス名のコンテナに入ってください。
   ```bash
   # コンテナに入る
-  $ docker exec -it pa_backend bash
+  $ docker exec -it sns-archive-viewer_backend bash
   ```
 - コンテナに入ると以下のような表示となります。
   ```
@@ -21,18 +21,18 @@
   ```
 
 ### 2. テストを実行する
-- pa_backendコンテナ内で以下のコマンドを実行してください。
+- sns-archive-viewer_backendコンテナ内で以下のコマンドを実行してください。
   ```bash
   # テストを実行
-  bundle exec rspec spec/models/user_spec.rb
+  $ bundle exec rspec spec/models/user_spec.rb
   ```
 - テストに成功し、以下のような表示が出れば動作確認完了です！
   ```bash
   # 実行結果
   User
-  is valid with valid attributes
+    有効な属性を持つ場合
 
-  Finished in 0.07038 seconds (files took 3.77 seconds to load)
+  Finished in 0.11794 seconds (files took 6.04 seconds to load)
   1 example, 0 failures
   ```
 
@@ -76,12 +76,12 @@ end
 #### 特定のファイルのみ実行する
 ```bash
 # bundle exec rspec [ファイルパス]
-bundle exec rspec spec/system/users_spec.rb
+$ bundle exec rspec spec/system/users_spec.rb
 ```
 #### 特定の行のみテストを実行する
 ```bash
 # bundle exec rspec [ファイルパス]:[行数]
-bundle exec rspec spec/system/users_spec.rb:10
+$ bundle exec rspec spec/models/users_spec.rb:10
 ```
 
 ## FactoryBotについて

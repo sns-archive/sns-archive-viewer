@@ -5,26 +5,26 @@
 まずはリポジトリをクローンします。
 
 ```bash
-git clone git@github.com:ochi-sho-private-study/slack-archive.git
+$ git clone git@github.com:sns-archive/sns-archive-viewer.git
 ```
 
 クローンできたか確認するために、以下のコマンドを実行します。
 
 ```bash
-ls
-# slack-archiveが存在することを確認
+$ ls
+# sns-archive-viewerディレクトリが存在することを確認
 ```
 
-次に、`slack-archive` のディレクトリに移動します。
+次に、`sns-archive-viewer` のディレクトリに移動します。
 
 ```bash
-cd slack-archive/
+$ cd sns-archive-viewer/
 ```
 
 再度 `ls` コマンドを実行し、以下のファイルやディレクトリが表示されていれば移動できています。
 
 ```bash
-ls
+$ ls
 # README.md, backend, bin, docker-compose.yml, docs, infra が表示される
 ```
 
@@ -44,13 +44,13 @@ env_file:
 ### envディレクトリに移動
 
 ```bash
-cd infra/env/
+$ cd infra/env/
 ```
 
 ### backend.envファイルを作成
 
 ```bash
-touch backend.env
+$ touch backend.env
 ```
 
 同ディレクトリに「backend.env.template」というテンプレートファイルがあるのでこれを元に作成します。
@@ -67,7 +67,7 @@ DATABASE_TEST_URL=mysql2://root:root@db/app_test
 `backend.env.template` の内容を `backend.env` にコピーします。
 
 ```bash
-cp backend.env.template backend.env
+$ cp backend.env.template backend.env
 ```
 
 backend.env ファイルの内容は以下のようになります。
@@ -98,18 +98,18 @@ test:
 
 ## 3. イメージをビルドし、データベースを作成
 
-ルートディレクトリに移動して以下のコマンドを実行します。
+プロジェクトのルートディレクトリに移動して以下のコマンドを実行します。
 
 ```bash
-bin/backend/setup
+$ bin/backend/setup
 ```
 
 以下のログが出力されていればOKです。
 
 ```plaintext
- ✔ Network slack-archive_default   Created
- ✔ Volume "slack-archive_db-data"  Created
- ✔ Container pa_database             Created
+ ✔ Network sns-archive-viewer_default   Created
+ ✔ Volume "sns-archive-viewer_db-data"  Created
+ ✔ Container sns-archive-viewer_database   Created
 ```
 
 データベースの作成が成功すると、次のメッセージが表示されます。
@@ -122,7 +122,7 @@ Created database 'app_test'
 次に、スキーマファイルを使用してテーブルを作成します。以下のコマンドを実行します。
 
 ```bash
-docker compose run backend rake ridgepole:apply
+$ docker compose run backend rake ridgepole:apply
 ```
 テーブルの作成が成功すると以下のような出力が表示されます。
 
@@ -148,23 +148,26 @@ docker compose up -d
 コンテナが正常に起動していることを確認します。
 
 ```plaintext
-[+] Running 2/2
- ✔ Container pa_database  Healthy
- ✔ Container pa_backend   Started
+[+] Running 4/4
+ ✔ Network sns-archive-viewer_default  Created
+ ✔ Container sns-archive-viewer_database  Healthy
+ ✔ Container sns-archive-viewer_backend   Started
+ ✔ Container sns-archive-viewer_backend   Started
 ```
 
 さらに、`docker compose ps` コマンドで再度確認します。
 
 ```bash
-docker compose ps
+$ docker compose ps
 # 出力結果:
-# NAME          IMAGE                     COMMAND                                               SERVICE   CREATED          STATUS                   PORTS
-# pa_backend    slack-archive-backend   "sh -c 'rm -f tmp/pids/server.pid && bundle exec …"   backend   26 seconds ago   Up 25 seconds            0.0.0.0:3000->3000/tcp
-# pa_database   mysql:8.0                 "docker-entrypoint.sh mysqld"                         db        6 minutes ago    Up 6 minutes (healthy)   0.0.0.0:3306->3306/tcp, 33060/tcp
+# CONTAINER ID   IMAGE                         COMMAND                   CREATED              STATUS                        PORTS                               NAMES
+# 7b73c393df4d   sns-archive-viewer-backend    "sh -c 'rm -f tmp/pi…"   About a minute ago   Up About a minute             0.0.0.0:3000->3000/tcp              sns-archive-viewer_backend
+# df55825220b1   sns-archive-viewer-frontend   "docker-entrypoint.s…"   About a minute ago   Up About a minute             0.0.0.0:4000->4000/tcp              sns-archive-viewer_frontend
+# e124f20f572f   mysql:8.0                     "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)   0.0.0.0:3306->3306/tcp, 33060/tcp   sns-archive-viewer_database
 ```
 
 データベースとバックエンドの両方のコンテナが起動していることを確認します。
 
 ## 5. 確認
 
-ブラウザで `localhost:3000` を入力し、Railsのウェルカムページが表示されれば環境構築は成功です。
+ブラウザで `http://localhost:4000` を入力し、Railsのウェルカムページが表示されれば環境構築は成功です。

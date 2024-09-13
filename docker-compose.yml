@@ -1,6 +1,6 @@
 services:
   frontend:
-    container_name: slack-archive_frontend
+    container_name: sns-archive-viewer_frontend
     build:
       context: .
       dockerfile: ./infra/frontend/Dockerfile
@@ -11,7 +11,7 @@ services:
     ports:
       - "4000:4000"
   backend:
-    container_name: slack-archive_backend
+    container_name: sns-archive-viewer_backend
     build:
       context: .
       dockerfile: ./infra/backend/Dockerfile
@@ -30,7 +30,7 @@ services:
   db:
     image: mysql:8.0
     platform: linux/amd64
-    container_name: slack-archive_database
+    container_name: sns-archive-viewer_database
     volumes:
       - db-data:/var/lib/mysql
     environment:
