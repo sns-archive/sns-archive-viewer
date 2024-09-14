@@ -18,11 +18,11 @@ require "faker"
     title: Faker::Lorem.sentence(word_count:10),
     content: Faker::Lorem.paragraphs(number: 5)
   )
-        
+
   10.times do |m|
     Comment.create!(
       memo_id: memo.id,
-      content:  Faker::Lorem.sentence(word_count:5)
-    )            
+      content: Faker::Lorem.sentence(word_count: 5)
+    )
   end
 end

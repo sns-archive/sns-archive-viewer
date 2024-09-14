@@ -6,6 +6,13 @@ ja:
         content: コンテンツ
       comment:
         content: 内容
+      tag:
+        label: ラベル
+        color: 色
+        priority: 優先度
+      memo_tag:
+        memo_id: メモ
+        tag_id: タグ
   errors:
     messages:
       blank: を入力してください
