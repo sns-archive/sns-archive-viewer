@@ -23,7 +23,7 @@
 #
 FactoryBot.define do
   factory :memo_tag do
-    memo
-    tag
+    memo { association(:memo, strategy: :build, memo_tags: [instance]) }
+    tag { association(:tag, strategy: :build, memo_tags: [instance]) }
   end
 end
