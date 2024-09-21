@@ -6,7 +6,7 @@ on:
       - "frontend/**"
 
 jobs:
-  jest:
+  biome_and_jest:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -41,6 +41,9 @@ jobs:
       - name: Get number of CPU cores
         uses: SimenB/github-actions-cpu-cores@v2
         id: cpu-cores
+
+      - name: Run format and lint check
+        run: yarn biome check
 
       - name: Run tests
         run: npx jest --bail --forceExit --max-workers ${{ steps.cpu-cores.outputs.count }}
