@@ -3,7 +3,7 @@
 class MemosController < ApplicationController
   # GET /memos
   def index
-    memos = Memo.order(id: 'DESC')
+    memos = Memo::Query.resolve(memos: Memo.all, params: params)
     render json: { memos: memos }, status: :ok
   end
 
