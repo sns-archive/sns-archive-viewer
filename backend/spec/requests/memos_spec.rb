@@ -71,7 +71,7 @@ RSpec.describe 'MemosController' do
         aggregate_failures do
           post '/memos', params: { memo: empty_memo_params }, as: :json
           assert_request_schema_confirm
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
           assert_response_schema_confirm(422)
           expect(response.parsed_body['errors']).to eq(%w[タイトルを入力してください コンテンツを入力してください])
         end
@@ -105,7 +105,7 @@ RSpec.describe 'MemosController' do
           put "/memos/#{existing_memo.id}", params: { memo: params }, as: :json
           assert_request_schema_confirm
           existing_memo.reload
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
           assert_response_schema_confirm(422)
           expect(response.parsed_body['errors']).to eq(['コンテンツを入力してください'])
         end
