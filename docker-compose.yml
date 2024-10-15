@@ -42,6 +42,25 @@ services:
       interval: 5s
       timeout: 10s
       retries: 5
+  sidekiq:
+    container_name: sns-archive-viewer_sidekiq
+    build:
+      context: .
+      dockerfile: ./infra/backend/Dockerfile
+    command: bundle exec sidekiq
+    volumes:
+      - ./backend:/usr/src/app
+    depends_on:
+      - redis
+      - backend
+  redis:
+    container_name: sns-archive-viewer_redis
+    image: redis:7.0
+    command: redis-server --appendonly yes
+    environment:
+      TZ: Asia/Tokyo
+    ports:
+      - 6379:6379
 volumes:
   db-data:
     driver: local

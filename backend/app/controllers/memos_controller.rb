@@ -4,6 +4,8 @@ class MemosController < ApplicationController
   # GET /memos
   def index
     memos = Memo.order(id: 'DESC')
+    HardWorker.perform_async('テストで非同期処理します', 1)
+    HardWorker.perform_in(3.hours, 'Classmethod', 1)
     render json: { memos: memos }, status: :ok
   end
 
