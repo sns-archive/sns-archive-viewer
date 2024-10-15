@@ -217,6 +217,8 @@ GEM
     rake (13.2.1)
     rdoc (6.5.0)
       psych (>= 4.0.0)
+    redis-client (0.22.2)
+      connection_pool
     regexp_parser (2.8.1)
     reline (0.5.10)
       io-console (~> 0.5)
@@ -273,6 +275,12 @@ GEM
       rubocop-factory_bot (~> 2.22)
     ruby-progressbar (1.13.0)
     securerandom (0.3.1)
+    sidekiq (7.3.2)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      logger
+      rack (>= 2.2.4)
+      redis-client (>= 0.22.2)
     simplecov (0.22.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -317,6 +325,7 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rails
   rubocop-rspec
+  sidekiq
   simplecov
   tzinfo-data
 
