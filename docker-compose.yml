@@ -42,6 +42,14 @@ services:
       interval: 5s
       timeout: 10s
       retries: 5
+  redis:
+    container_name: sns-archive-viewer_redis
+    image: redis:7.0
+    command: redis-server --appendonly yes
+    environment:
+      TZ: Asia/Tokyo
+    ports:
+      - 6379:6379
 volumes:
   db-data:
     driver: local
