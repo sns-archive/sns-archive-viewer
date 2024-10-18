@@ -10,4 +10,6 @@
 #
 # NOTE: ログイン機能は当分は実装しないため、このモデルは当分は使用しない。
 class User < ApplicationRecord
+  validates :email, presence: true, length: { maximum: 30 }
+  validates :password, presence: true, length: { maximum: 30 }
 end

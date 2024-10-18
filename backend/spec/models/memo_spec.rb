@@ -11,64 +11,58 @@
 #  updated_at            :datetime         not null
 #
 RSpec.describe Memo do
-  subject(:memo) { build(:memo) }
-
   describe 'バリデーションのテスト' do
-    context 'title と content が有効な場合' do
-      it 'valid?メソッドがtrueを返すこと' do
+    let!(:memo) { build(:memo) }
+
+    context '属性が正常な場合' do
+      it 'trueを返す' do
         expect(memo).to be_valid
       end
     end
 
     context 'titleが空文字の場合' do
-      before { memo.title = '' }
-
-      it 'valid?メソッドがfalseを返すこと' do
-        expect(memo).not_to be_valid
+      before do
+        memo.title = ''
       end
 
-      it 'errorsに「タイトルを入力してください」と格納されること' do
-        memo.valid?
-        expect(memo.errors.full_messages).to eq ['タイトルを入力してください']
+      it 'falseを返し、errorが格納される' do
+        aggregate_failures do
+          expect(memo).not_to be_valid
+          expect(memo.errors.full_messages).to eq ['タイトルを入力してください']
+        end
       end
     end
 
     context 'titleがnilの場合' do
       before { memo.title = nil }
 
-      it 'valid?メソッドがfalseを返すこと' do
-        expect(memo).not_to be_valid
-      end
-
-      it 'errorsに「タイトルを入力してください」と格納されること' do
-        memo.valid?
-        expect(memo.errors.full_messages).to eq ['タイトルを入力してください']
+      it 'falseになり、errorが格納される' do
+        aggregate_failures do
+          expect(memo).not_to be_valid
+          expect(memo.errors.full_messages).to eq ['タイトルを入力してください']
+        end
       end
     end
 
     context 'contentが空文字の場合' do
       before { memo.content = '' }
 
-      it 'valid?メソッドがfalseを返すこと' do
-        expect(memo).not_to be_valid
-      end
-
-      it 'errorsに「コンテンツを入力してください」と格納されること' do
-        memo.valid?
-        expect(memo.errors.full_messages).to eq ['コンテンツを入力してください']
+      it 'falseが返り、errorsに「コンテンツを入力してください」と格納されること' do
+        aggregate_failures do
+          expect(memo).not_to be_valid
+          expect(memo.errors.full_messages).to eq ['コンテンツを入力してください']
+        end
       end
     end
 
     context 'contentがnilの場合' do
       before { memo.content = nil }
 
-      it 'valid?メソッドがfalseを返すこと' do
-        expect(memo).not_to be_valid
-      end
-
-      it 'errorsに「コンテンツを入力してください」と格納されること' do
-        memo.valid?
-        expect(memo.errors.full_messages).to eq ['コンテンツを入力してください']
+      it 'falseになり、errorsが格納されること' do
+        aggregate_failures do
+          expect(memo).not_to be_valid
+          expect(memo.errors.full_messages).to eq ['コンテンツを入力してください']
+        end
       end
     end
   end
