@@ -42,6 +42,11 @@ gem 'rails-i18n' # i18n 日本語化対応用gem
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem "rack-cors"
 
+# 非同期処理を実現する
+# github: https://github.com/sidekiq/sidekiq
+# wiki: https://github.com/sidekiq/sidekiq/wiki/Getting-Started
+gem 'sidekiq'
+
 group :development, :test do
   # Github: https://github.com/willnet/committee-rails
   gem 'committee-rails'
