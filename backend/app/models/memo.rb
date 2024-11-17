@@ -15,7 +15,11 @@ class Memo < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   module Query
-    FILTERS = %i[TitleFilter ContentFilter OrderFilter].freeze
+    FILTERS = %i[
+      TitleFilter
+      ContentFilter
+      OrderFilter
+    ].freeze
     private_constant :FILTERS
 
     # @param memos [ActiveRecord::Relation[Memo]]
