@@ -10,11 +10,11 @@ require:
 AllCops:
   NewCops: enable
   Exclude:
-    - 'bin/**/*'
-    - 'db/**/*'
-    - 'config/**/*'
-    - 'vendor/**/*'
-    - 'tmp/**/*'
+    - "bin/**/*"
+    - "db/**/*"
+    - "config/**/*"
+    - "vendor/**/*"
+    - "tmp/**/*"
 
 # クラスやモジュールにコメントを付与する制約をかけたくないため。
 Style/Documentation:
@@ -23,7 +23,7 @@ Style/Documentation:
 Metrics/MethodLength:
   Max: 13
 
-ClassLength:
+Metrics/ClassLength:
   CountComments: false
   Max: 100
 
