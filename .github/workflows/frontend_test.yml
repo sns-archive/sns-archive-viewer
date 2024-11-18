@@ -1,0 +1,49 @@
+name: Frontend CI
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/frontend_test.yml"
+      - "frontend/**"
+
+jobs:
+  biome_and_jest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    defaults:
+      run:
+        working-directory: ./frontend
+
+    steps:
+      - name: Checkout Commit
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: "./frontend/package.json"
+          cache: "yarn"
+          cache-dependency-path: "./frontend/yarn.lock"
+
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Cache Jest
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-jest
+        with:
+          path: ./frontend/node_modules/.cache/jest
+          key: ${{ runner.os }}-jest-${{ hashFiles('frontend/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-jest-
+
+      - name: Get number of CPU cores
+        uses: SimenB/github-actions-cpu-cores@v2
+        id: cpu-cores
+
+      - name: Run format and lint check
+        run: yarn biome check
+
+      - name: Run tests
+        run: npx jest --bail --forceExit --max-workers ${{ steps.cpu-cores.outputs.count }}

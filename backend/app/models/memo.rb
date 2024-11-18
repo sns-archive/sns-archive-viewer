@@ -11,8 +11,13 @@
 #  updated_at            :datetime         not null
 #
 class Memo < ApplicationRecord
-  validates :title, :content, presence: true
   has_many :comments, dependent: :destroy
+  has_many :memo_tags, dependent: :destroy
+  has_many :tags, through: :memo_tags
+
+  validates :title, presence: true
+  validates :title, length: { maximum: 30 }
+  validates :content, presence: true
 
   module Query
     FILTERS = %i[
