@@ -85,75 +85,58 @@ RSpec.describe Memo do
       }
     end
 
-    context 'タイトル検索のテスト' do
-      context 'タイトルで検索した場合' do
-        it 'タイトルフィルターが正しく機能し、期待されるメモが取得できることを確認する' do
-          aggregate_failures do
-            result = Memo::Query.resolve(memos: described_class.all, params: { title: 'テスト' })
-            expect(result).to contain_exactly(memos['1'], memos['2'])
-            expect(result).not_to include(memos['3'])
-          end
-        end
-      end
-
-      context 'タイトルなしで検索した場合' do
-        it 'すべてのメモが取得できることを確認する' do
-          aggregate_failures do
-            result = Memo::Query.resolve(memos: described_class.all, params: {})
-            expect(result).to contain_exactly(memos['1'], memos['2'], memos['3'])
-          end
+    context 'タイトルで検索した場合' do
+      it 'タイトルフィルターが正しく機能し、期待されるメモが取得できることを確認する' do
+        aggregate_failures do
+          result = Memo::Query.resolve(memos: described_class.all, params: { title: 'テスト' })
+          expect(result).to contain_exactly(memos['1'], memos['2'])
+          expect(result).not_to include(memos['3'])
         end
       end
     end
 
-    context 'コンテンツ検索のテスト' do
-      context 'コンテンツで検索した場合' do
-        it 'コンテンツフィルターが正しく機能し、期待されるメモが取得できることを確認する' do
-          aggregate_failures do
-            result = Memo::Query.resolve(memos: described_class.all, params: { content: 'コンテンツ' })
-            expect(result).to contain_exactly(memos['1'], memos['2'], memos['3'])
-          end
-        end
-      end
-
-      context 'コンテンツなしで検索した場合' do
-        it 'すべてのメモが取得できることを確認する' do
-          aggregate_failures do
-            result = Memo::Query.resolve(memos: described_class.all, params: {})
-            expect(result).to contain_exactly(memos['1'], memos['2'], memos['3'])
-          end
+    context 'コンテンツで検索した場合' do
+      it 'コンテンツフィルターが正しく機能し、期待されるメモが取得できることを確認する' do
+        aggregate_failures do
+          result = Memo::Query.resolve(memos: described_class.all, params: { content: 'コンテンツ' })
+          expect(result).to contain_exactly(memos['1'], memos['2'], memos['3'])
         end
       end
     end
 
-    context 'タイトルとコンテンツ検索のテスト' do
-      context 'タイトルとコンテンツで検索した場合' do
-        it 'タイトルとコンテンツの両方でフィルターが正しく機能し、期待されるメモが取得できることを確認する' do
-          aggregate_failures do
-            result = Memo::Query.resolve(memos: described_class.all, params: { title: 'その他', content: 'コンテンツ' })
-            expect(result).to contain_exactly(memos['3'])
-            expect(result).not_to include(memos['1'], memos['2'])
-          end
+    context 'タイトルとコンテンツで検索した場合' do
+      it 'タイトルとコンテンツの両方でフィルターが正しく機能し、期待されるメモが取得できることを確認する' do
+        aggregate_failures do
+          result = Memo::Query.resolve(memos: described_class.all, params: { title: 'その他', content: 'コンテンツ' })
+          expect(result).to contain_exactly(memos['3'])
+          expect(result).not_to include(memos['1'], memos['2'])
         end
       end
     end
 
-    context '並び替え機能のテスト' do
-      context '昇順で検索した場合' do
-        it '昇順機能が正しく機能していること' do
-          aggregate_failures do
-            result = Memo::Query.resolve(memos: described_class.all, params: { order: 'asc' })
-            expect(result).to eq([memos['1'], memos['2'], memos['3']])
-          end
+    context 'タイトルとコンテンツなしで検索した場合' do
+      it 'すべてのメモが取得できることを確認する' do
+        aggregate_failures do
+          result = Memo::Query.resolve(memos: described_class.all, params: {})
+          expect(result).to contain_exactly(memos['1'], memos['2'], memos['3'])
         end
       end
+    end
 
-      context '並び順を指定しなかった場合' do
-        it 'デフォルトで降順機能が正しく機能されていること' do
-          aggregate_failures do
-            result = Memo::Query.resolve(memos: described_class.all, params: {})
-            expect(result).to eq([memos['3'], memos['2'], memos['1']])
-          end
+    context '昇順で検索した場合' do
+      it '昇順機能が正しく機能していること' do
+        aggregate_failures do
+          result = Memo::Query.resolve(memos: described_class.all, params: { order: 'asc' })
+          expect(result).to eq([memos['1'], memos['2'], memos['3']])
+        end
+      end
+    end
+
+    context '並び順を指定しなかった場合' do
+      it 'デフォルトで降順機能が正しく機能されていること' do
+        aggregate_failures do
+          result = Memo::Query.resolve(memos: described_class.all, params: {})
+          expect(result).to eq([memos['3'], memos['2'], memos['1']])
         end
       end
     end
