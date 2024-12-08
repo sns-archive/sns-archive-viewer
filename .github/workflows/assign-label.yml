@@ -14,6 +14,3 @@ jobs:
         if: ${{ github.event.action == 'opened' }}
         with:
           configuration-path: .github/labeler-branch.yaml
-      - uses: actions/labeler@v5
-        with:
-          configuration-path: .github/labeler-files.yaml
