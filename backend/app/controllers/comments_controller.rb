@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
     if comment.save
       head :no_content
     else
-      render json: { errors: comment.errors.full_messages }, status: :unprocessable_content
+      render json: { message: comment.errors.full_messages }, status: :unprocessable_content
     end
   end
 
