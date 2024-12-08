@@ -6,9 +6,14 @@
 #
 #  id                    :bigint           not null, primary key
 #  content(メモの本文)   :text(65535)      not null
-#  title(メモのタイトル) :string(255)      not null
+#  discarded_at          :datetime
+#  title(メモのタイトル) :string(30)       not null
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
+#
+# Indexes
+#
+#  index_memos_on_discarded_at  (discarded_at)
 #
 RSpec.describe Memo do
   describe 'バリデーションのテスト' do
