@@ -133,9 +133,13 @@ RSpec.describe 'MemosController' do
     context 'メモを削除しようとした場合' do
       let!(:existing_memo) { create(:memo) }
 
-      it 'メモを削除されたことを確認する' do
+      it 'メモが論理削除されたことを確認する' do
         aggregate_failures do
-          expect { delete "/memos/#{existing_memo.id}" }.to change(Memo, :count).by(-1)
+          # 論理削除のためメモの総数が変わっていないことを確認する
+          expect { delete "/memos/#{existing_memo.id}" }.not_to change(Memo.with_discarded, :count)
+          existing_memo.reload
+          expect(existing_memo.discarded?).to be true
+          expect(existing_memo.discarded_at).not_to be_nil
           assert_request_schema_confirm
           expect(response).to have_http_status(:no_content)
           assert_response_schema_confirm(204)
