@@ -44,6 +44,7 @@ RSpec.describe 'TagsController' do
           end.not_to change(Tag, :count)
           expect(response).to have_http_status(:no_content)
           expect(response.body).to be_empty
+          expect(Tag.find(tag.id)).to have_attributes(label: params[:label])
         end
       end
     end
