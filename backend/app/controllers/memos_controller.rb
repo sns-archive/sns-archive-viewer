@@ -38,8 +38,11 @@ class MemosController < ApplicationController
   # DELETE /memos/:id
   def destroy
     memo = Memo.find(params[:id])
-    memo.destroy
-    head :no_content
+    if memo.discard
+      head :no_content
+    else
+      render json: { errors: memo.errors.full_messages }, status: :unprocessable_content
+    end
   end
 
   private

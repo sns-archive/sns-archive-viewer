@@ -6,11 +6,19 @@
 #
 #  id                    :bigint           not null, primary key
 #  content(メモの本文)   :text(65535)      not null
-#  title(メモのタイトル) :string(255)      not null
+#  discarded_at          :datetime
+#  title(メモのタイトル) :string(30)       not null
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #
+# Indexes
+#
+#  index_memos_on_discarded_at  (discarded_at)
+#
 class Memo < ApplicationRecord
+  include Discard::Model
+  default_scope -> { kept }
+
   has_many :comments, dependent: :destroy
   has_many :memo_tags, dependent: :destroy
   has_many :tags, through: :memo_tags
