@@ -73,7 +73,7 @@ RSpec.describe 'MemosController' do
           assert_request_schema_confirm
           expect(response).to have_http_status(:unprocessable_content)
           assert_response_schema_confirm(422)
-          expect(response.parsed_body['errors']).to eq(%w[タイトルを入力してください コンテンツを入力してください])
+          expect(response.parsed_body['messages']).to eq(%w[タイトルを入力してください コンテンツを入力してください])
         end
       end
     end
@@ -107,7 +107,7 @@ RSpec.describe 'MemosController' do
           existing_memo.reload
           expect(response).to have_http_status(:unprocessable_content)
           assert_response_schema_confirm(422)
-          expect(response.parsed_body['errors']).to eq(['コンテンツを入力してください'])
+          expect(response.parsed_body['messages']).to eq(['コンテンツを入力してください'])
         end
       end
     end

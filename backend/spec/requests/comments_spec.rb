@@ -28,7 +28,7 @@ RSpec.describe 'CommentsController' do
             post "/memos/#{memo.id}/comments", params: { comment: invalid_comment_params }, as: :json
           end.not_to change(Comment, :count)
           expect(response).to have_http_status(:unprocessable_content)
-          expect(response.parsed_body['errors']).to eq(['内容を入力してください'])
+          expect(response.parsed_body['messages']).to eq(['内容を入力してください'])
         end
       end
     end
