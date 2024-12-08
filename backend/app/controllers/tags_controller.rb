@@ -7,7 +7,7 @@ class TagsController < ApplicationController
     if tag.save
       head :no_content
     else
-      render json: { message: tag.errors.full_messages }, status: :unprocessable_content
+      render json: { messages: tag.errors.full_messages }, status: :unprocessable_content
     end
   end
 
@@ -18,7 +18,7 @@ class TagsController < ApplicationController
     if tag.update(tag_params)
       head :no_content
     else
-      render json: { message: tag.errors.full_messages }, status: :unprocessable_content
+      render json: { messages: tag.errors.full_messages }, status: :unprocessable_content
     end
   end
 

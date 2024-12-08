@@ -26,7 +26,7 @@ RSpec.describe 'TagsController' do
             post '/tags', params: params, as: :json
           end.not_to change(Tag, :count)
           expect(response).to have_http_status(:unprocessable_content)
-          expect(response.parsed_body['message']).to eq(['ラベルを入力してください'])
+          expect(response.parsed_body['messages']).to eq(['ラベルを入力してください'])
         end
       end
     end
@@ -59,7 +59,7 @@ RSpec.describe 'TagsController' do
             patch "/tags/#{tag.id}", params: params, as: :json
           end.not_to change(Tag, :count)
           expect(response).to have_http_status(:unprocessable_content)
-          expect(response.parsed_body['message']).to eq(['ラベルは30文字以内で入力してください'])
+          expect(response.parsed_body['messages']).to eq(['ラベルは30文字以内で入力してください'])
         end
       end
     end
