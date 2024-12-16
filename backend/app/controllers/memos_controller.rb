@@ -20,7 +20,7 @@ class MemosController < ApplicationController
     if memo.save
       head :no_content
     else
-      render json: { errors: memo.errors.full_messages }, status: :unprocessable_content
+      render json: { messages: memo.errors.full_messages }, status: :unprocessable_content
     end
   end
 
@@ -31,7 +31,7 @@ class MemosController < ApplicationController
     if memo.update(update_memo_params)
       head :no_content
     else
-      render json: { errors: memo.errors.full_messages }, status: :unprocessable_content
+      render json: { messages: memo.errors.full_messages }, status: :unprocessable_content
     end
   end
 
