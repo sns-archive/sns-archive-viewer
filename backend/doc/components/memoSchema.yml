@@ -21,6 +21,11 @@ components:
           type: string
           format: date-time
           example: 2021-01-01T00:00:00.000Z
+        discarded_at:
+          type: string
+          format: date-time
+          nullable: true
+          example: null
         comments:
           type: array
           items:

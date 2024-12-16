@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 0) do
+ActiveRecord::Schema[7.2].define(version: 0) do
   create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "memo_id", null: false, comment: "メモID"
     t.string "content", limit: 1024, null: false, comment: "内容"
@@ -34,6 +34,8 @@ ActiveRecord::Schema[7.0].define(version: 0) do
     t.text "content", null: false, comment: "メモの本文"
     t.timestamp "created_at", null: false
     t.timestamp "updated_at", null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_memos_on_discarded_at"
   end
 
   create_table "tags", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
