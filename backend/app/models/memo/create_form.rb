@@ -31,17 +31,26 @@ class Memo
       build_memo_tags
     end
 
+    # @note このメソッド内でMemoと関連付いているレコードを保存する
+    # @return [Boolean] 保存に成功したかどうか
     def save
       return false unless valid?
 
       ActiveRecord::Base.transaction do
-        @memo.save!
-        @memo_tags.each(&:save!)
+        save_record!(@memo)
+        @memo_tags.each { save_record!(_1) }
       end
-      true
-    rescue ActiveRecord::RecordInvalid => e
-      errors.add(:base, e.message)
-      false
+
+      # @note errorsが空の場合はtrueを返せる。
+      errors.empty?
+    end
+
+    # @param record [ApplicationRecord] ActiveRecordのモデルインスタンス
+    def save_record!(record)
+      return if record.nil? || record.save
+
+      errors.add(:base, record.errors.full_messages.to_sentence)
+      raise ActiveRecord::Rollback
     end
 
     private
