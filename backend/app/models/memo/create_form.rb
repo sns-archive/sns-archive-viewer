@@ -67,7 +67,7 @@ class Memo
     end
 
     def build_memo_tags
-      tags.map { |tag| MemoTag.new(memo: @memo, tag: tag) }
+      @memo_tags = tags.map { |tag| MemoTag.new(memo: @memo, tag: tag) }
     end
   end
 end
