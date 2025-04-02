@@ -11,6 +11,11 @@ class Memo
     validates :memo, cascade: true
     validates :memo_tags, cascade: true
 
+    # @param params [ActionController::Parameters] Controller側でpermitしたパラメータ
+    #   @option params [String] :title メモのタイトル
+    #   @option params [String] :content メモの本文
+    #   @option params [Array<Hash>] :tags 紐付けるタグの情報
+    #     @option tags [Integer] :tag_id タグのID
     # @return [Memo::CreateForm]
     def self.build(params)
       new(params).tap(&:setup)
