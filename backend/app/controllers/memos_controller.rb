@@ -16,11 +16,11 @@ class MemosController < ApplicationController
 
   # POST /memos
   def create
-    memo = Memo.new(memo_params)
-    if memo.save
+    form = Memo::CreateForm.build(memo_params)
+    if form.save
       head :no_content
     else
-      render json: { messages: memo.errors.full_messages }, status: :unprocessable_content
+      render json: { messages: form.errors.full_messages }, status: :unprocessable_content
     end
   end
 
@@ -45,7 +45,8 @@ class MemosController < ApplicationController
   private
 
   def memo_params
-    params.require(:memo).permit(:title, :content)
+    # e.g. params: { memo: { title: 'タイトル', content: 'メモ', tags: [{ tag_id: 1},] } }
+    params.require(:memo).permit(:title, :content, tags: [{}])
   end
 
   def update_memo_params

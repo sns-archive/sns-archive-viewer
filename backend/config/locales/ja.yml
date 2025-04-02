@@ -13,6 +13,12 @@ ja:
       memo_tag:
         memo_id: メモ
         tag_id: タグ
+  activemodel:
+    attributes:
+      memo/create_form:
+        memo: メモ
+        memo_tags: メモのタグ
   errors:
     messages:
       blank: を入力してください
+      invalid_association: の%{association}
