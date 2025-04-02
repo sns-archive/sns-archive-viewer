@@ -62,10 +62,12 @@ class Memo
       )
     end
 
+    def tags
+      Tag.where(id: (@params[:tags] || []).pluck(:tag_id))
+    end
+
     def build_memo_tags
-      tag_ids = @params[:tags]&.map { |tag| tag[:tag_id] } || []
-      tags = Tag.where(id: tag_ids)
-      @memo_tags = tags.map { |tag| MemoTag.new(memo: @memo, tag: tag) }
+      tags.map { |tag| MemoTag.new(memo: @memo, tag: tag) }
     end
   end
 end
