@@ -5,6 +5,7 @@ class Memo
     # indent
     # https://github.com/rubocop/ruby-style-guide?tab=readme-ov-file#empty-lines-around-bodies
     include ActiveModel::Validations
+
     attr_reader :memo, :memo_tags
 
     validates :memo, cascade: true
@@ -27,6 +28,7 @@ class Memo
 
     def save
       return false unless valid?
+
       ActiveRecord::Base.transaction do
         @memo.save!
         @memo_tags.each(&:save!)
