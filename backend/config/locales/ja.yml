@@ -18,6 +18,8 @@ ja:
       memo/create_form:
         memo: メモ
         memo_tags: メモのタグ
+      memo/update_form:
+        memo: メモ
   errors:
     messages:
       blank: を入力してください
