@@ -44,3 +44,8 @@ create_table "channels", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", fo
   t.datetime "created_at", null: false
   t.datetime "updated_at", null: false
 end
+
+create_table "channel_details", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  t.references "channel", null:false, foreign_key: { name: "fk_chanel_id_on_channel_details" }, comment: "チャンネルID"
+  t.string "description", limit: 100, null: false, comment: "チャンネル説明"
+end
