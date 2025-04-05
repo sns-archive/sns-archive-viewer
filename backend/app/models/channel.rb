@@ -12,9 +12,9 @@
 #
 
 class Channel < ApplicationRecord
-    has_one :channel_detail, dependent: :destroy
+  has_one :channel_detail, dependent: :destroy
 
-    validates :name, presence: true
-    validates :name, length: { maximum: 50 }
-    validates :is_public, inclusion: [true, false]
+  validates :name, presence: true
+  validates :name, length: { maximum: 50 }
+  validates :is_public, inclusion: [true, false]
 end

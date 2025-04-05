@@ -49,7 +49,7 @@ RSpec.describe Channel do
 
     context 'nameが51文字の場合' do
       before do
-          channel.name = 'a' * 51
+        channel.name = 'a' * 51
       end
 
       it 'falseを返し、errorが格納される' do

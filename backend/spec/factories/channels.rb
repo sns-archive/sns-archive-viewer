@@ -12,8 +12,8 @@
 #
 
 FactoryBot.define do
-    factory :channel do
-        name { Faker::Lorem.sentence(word_count: 3) }
-        is_public { Faker::Boolean.boolean }
-    end
+  factory :channel do
+    name { Faker::Lorem.sentence(word_count: 3) }
+    is_public { Faker::Boolean.boolean }
+  end
 end
