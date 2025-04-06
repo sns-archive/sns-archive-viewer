@@ -4,7 +4,7 @@ class Memo
   class UpdateForm
     include ActiveModel::Validations
 
-    attr_accessor :memo
+    attr_reader :id, :params
 
     validates :memo, cascade: true
 
@@ -22,19 +22,34 @@ class Memo
     end
 
     def setup
-      @memo = Memo.find(@id)
-      return if @params[:content].nil?
-
-      @memo.content = @params[:content]
+      memo
     end
 
     # @return [Boolean] 保存に成功したかどうか
     def save
-      if valid?
-        @memo.save
-      else
-        false
+      return if invalid?
+
+      ActiveRecord::Base.transaction do
+        save_record!(@memo)
       end
+
+      # @note errorsが空の場合はtrueを返せる。
+      errors.empty?
+    end
+
+    private
+
+    def memo
+      @memo ||= Memo.find(@id).tap do |memo|
+        memo.content = @params[:content] unless @params[:content].nil?
+      end
+    end
+
+    def save_record!(record)
+      return if record.invalid? || record.save
+
+      errors.add(:base, record.errors.full_messages.to_sentence)
+      raise ActiveRecord::Rollback
     end
   end
 end
