@@ -19,7 +19,7 @@ ActiveRecord::Schema[7.2].define(version: 0) do
 
   create_table "channels", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 50, null: false, comment: "チャンネル名"
-    t.boolean "is_public", null: false, comment: "公開・非公開"
+    t.boolean "is_public", null: false, comment: "公開(true)・非公開(false)の設定"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
