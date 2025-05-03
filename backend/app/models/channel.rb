@@ -16,5 +16,5 @@ class Channel < ApplicationRecord
 
   validates :name, presence: true
   validates :name, length: { maximum: 50 }
-  validates :is_public, inclusion: [true, false]
+  validates :public_mark, inclusion: [true, false]
 end

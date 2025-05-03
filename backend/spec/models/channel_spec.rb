@@ -60,9 +60,9 @@ RSpec.describe Channel do
       end
     end
 
-    context 'is_publicがnilの場合' do
+    context 'public_markがnilの場合' do
       before do
-        channel.is_public = nil
+        channel.public_mark = nil
       end
 
       it 'falseを返し、errorが格納される' do
@@ -73,9 +73,9 @@ RSpec.describe Channel do
       end
     end
 
-    context 'is_publicがtureの場合' do
+    context 'public_markがtureの場合' do
       before do
-        channel.is_public = true
+        channel.public_mark = true
       end
 
       it 'trueを返す' do
@@ -83,9 +83,9 @@ RSpec.describe Channel do
       end
     end
 
-    context 'is_publicがfalseの場合' do
+    context 'public_markがfalseの場合' do
       before do
-        channel.is_public = false
+        channel.public_mark = false
       end
 
       it 'trueを返す' do
