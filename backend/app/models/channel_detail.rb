@@ -10,7 +10,8 @@
 #
 # Indexes
 #
-#  index_channel_details_on_channel_id  (channel_id)
+#  index_channel_details_on_channel_id         (channel_id)
+#  unique_index_channel_details_on_channel_id  (channel_id) UNIQUE
 #
 # Foreign Keys
 #

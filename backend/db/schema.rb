@@ -15,6 +15,7 @@ ActiveRecord::Schema[7.2].define(version: 0) do
     t.bigint "channel_id", null: false, comment: "チャンネルID"
     t.string "description", limit: 100, null: false, comment: "チャンネル説明"
     t.index ["channel_id"], name: "index_channel_details_on_channel_id"
+    t.index ["channel_id"], name: "unique_index_channel_details_on_channel_id", unique: true
   end
 
   create_table "channels", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
