@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 0) do
+ActiveRecord::Schema[7.2].define(version: 0) do
+  create_table "channel_details", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "channel_id", null: false, comment: "チャンネルID"
+    t.string "description", limit: 100, null: false, comment: "チャンネル説明"
+    t.index ["channel_id"], name: "index_channel_details_on_channel_id"
+    t.index ["channel_id"], name: "unique_index_channel_details_on_channel_id", unique: true
+  end
+
+  create_table "channels", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", limit: 50, null: false, comment: "チャンネル名"
+    t.boolean "public_mark", null: false, comment: "公開(true)・非公開(false)の設定"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "memo_id", null: false, comment: "メモID"
     t.string "content", limit: 1024, null: false, comment: "内容"
@@ -52,6 +66,7 @@ ActiveRecord::Schema[7.0].define(version: 0) do
     t.timestamp "updated_at", null: false
   end
 
+  add_foreign_key "channel_details", "channels", name: "fk_chanel_id_on_channel_details"
   add_foreign_key "comments", "memos", name: "fk_comments_memo_id"
   add_foreign_key "memo_tags", "memos", name: "fk_memo_id_on_memo_tags"
   add_foreign_key "memo_tags", "tags", name: "fk_tag_id_on_memo_tags"

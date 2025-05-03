@@ -13,6 +13,11 @@ ja:
       memo_tag:
         memo_id: メモ
         tag_id: タグ
+      channel:
+        name: チャンネル名
+        public_mark: 公開ステータス
+      channel_detail:
+        description: チャンネル説明
   activemodel:
     attributes:
       memo/create_form:
@@ -22,3 +27,4 @@ ja:
     messages:
       blank: を入力してください
       invalid_association: の%{association}
+      too_long: は%{count}文字以内で入力してください
