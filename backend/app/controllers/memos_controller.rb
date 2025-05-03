@@ -25,17 +25,13 @@ class MemosController < ApplicationController
   end
 
   # PUT /memos/:id
-  # レスポンスが違うって、ことはコントローラーそうに問題がありそう
-  # 最短でデバッグできてそうかを考える
-  # エラーを確認した際に、バリデーションエラーがあったら、その項目を触っている触っている箇所を確認しよう
   def update
-    form = Memo::UpdateForm.build(update_memo_params, params[:id])
+    form = Memo::UpdateForm.build(params:update_memo_params, id:params[:id])
     if form.save
       head(:no_content)
     else
       render(
         json: { messages: form.errors.full_messages },
-        # ググる
         status: :unprocessable_entity
       )
     end
