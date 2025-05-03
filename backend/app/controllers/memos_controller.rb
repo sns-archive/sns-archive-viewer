@@ -26,12 +26,14 @@ class MemosController < ApplicationController
 
   # PUT /memos/:id
   def update
-    memo = Memo.find(params[:id])
-
-    if memo.update(update_memo_params)
-      head :no_content
+    form = Memo::UpdateForm.build(params: update_memo_params, id: params[:id])
+    if form.save
+      head(:no_content)
     else
-      render json: { messages: memo.errors.full_messages }, status: :unprocessable_content
+      render(
+        json: { messages: form.errors.full_messages },
+        status: :unprocessable_entity
+      )
     end
   end
 
