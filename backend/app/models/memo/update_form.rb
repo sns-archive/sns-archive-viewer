@@ -11,7 +11,7 @@ class Memo
     # @param params [ActionController::Parameters] Controller側でpermitしたパラメータ
     #   @option params [String] :content メモの本文
     # @return [Memo::UpdateForm]
-    def self.build(params, id)
+    def self.build(params:, id:)
       new(params, id).tap(&:setup)
     end
 
@@ -30,7 +30,7 @@ class Memo
       return if invalid?
 
       ActiveRecord::Base.transaction do
-        save_record!(@memo)
+        save_record!(memo)
       end
 
       # @note errorsが空の場合はtrueを返せる。
@@ -40,8 +40,8 @@ class Memo
     private
 
     def memo
-      @memo ||= Memo.find(@id).tap do |memo|
-        memo.content = @params[:content] unless @params[:content].nil?
+      @memo ||= Memo.find(id).tap do |memo|
+        memo.content = params[:content] unless params[:content].nil?
       end
     end
 
