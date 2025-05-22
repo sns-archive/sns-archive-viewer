@@ -27,6 +27,27 @@ services:
     depends_on:
       db:
         condition: service_healthy
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.13.4
+    container_name: sns-archive-viewer_elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false  # 開発用に認証を無効化
+      - bootstrap.memory_lock=true
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ports:
+      - "9200:9200"
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    healthcheck:
+      test: curl --silent --fail http://localhost:9200/_cluster/health || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
   db:
     image: mysql:8.0
     platform: linux/amd64
