@@ -43,5 +43,5 @@ describe("/sample のテスト", () => {
 
     await user.click(decrementButton);
     expect(counter).toHaveTextContent("-1");
-  })
+  });
 });
