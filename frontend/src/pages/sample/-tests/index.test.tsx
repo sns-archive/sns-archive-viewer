@@ -2,7 +2,7 @@ import { router } from "@/main";
 import { RouterProvider } from "@tanstack/react-router";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, test } from "vitest";
+import { describe, expect, it } from "vitest";
 
 const customRender = async () => {
   await router.navigate({
@@ -13,12 +13,12 @@ const customRender = async () => {
 };
 
 describe("/sample のテスト", () => {
-  test("+ボタンを押下すると、カウンターが1増加すること", async () => {
+  it("+ボタンを押下すると、カウンターが1増加すること", async () => {
     customRender();
     const user = userEvent.setup();
 
     const counter = await screen.findByText("0");
-    expect(counter).toHaveTextContent("0");
+    expect(counter).toBeInTheDocument();
 
     const incrementButton = await screen.findByRole("button", {
       name: "+1",
@@ -28,4 +28,20 @@ describe("/sample のテスト", () => {
     await user.click(incrementButton);
     expect(counter).toHaveTextContent("1");
   });
+
+  it("-ボタンを押下すると、カウンターが1減少すること", async () => {
+    customRender();
+    const user = userEvent.setup();
+
+    const counter = await screen.findByText("0");
+    expect(counter).toBeInTheDocument();
+
+    const decrementButton = await screen.findByRole("button", {
+      name: "-1",
+    });
+    expect(decrementButton).toBeInTheDocument();
+
+    await user.click(decrementButton);
+    expect(counter).toHaveTextContent("-1");
+  })
 });
