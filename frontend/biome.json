@@ -1,22 +1,18 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.2/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
   "vcs": {
     "enabled": false,
     "clientKind": "git",
     "useIgnoreFile": false
   },
   "files": {
-    "ignore": [".next", "node_modules"]
+    "ignoreUnknown": false,
+    "ignore": ["src/routeTree.gen.ts"],
+    "include": ["src/*", ".vscode/*", "index.html", "vite.config.js"]
   },
   "formatter": {
     "enabled": true,
-    "formatWithErrors": false,
-    "ignore": [],
-    "attributePosition": "auto",
-    "indentStyle": "space",
-    "indentWidth": 2,
-    "lineEnding": "lf",
-    "lineWidth": 100
+    "indentStyle": "space"
   },
   "organizeImports": {
     "enabled": true
@@ -28,29 +24,8 @@
     }
   },
   "javascript": {
-    "parser": {
-      "unsafeParameterDecoratorsEnabled": true
-    },
     "formatter": {
-      "enabled": true,
-      "quoteStyle": "double",
-      "jsxQuoteStyle": "double",
-      "trailingCommas": "all",
-      "semicolons": "always",
-      "arrowParentheses": "asNeeded",
-      "indentWidth": 2,
-      "indentStyle": "space",
-      "lineWidth": 100,
-      "quoteProperties": "asNeeded"
-    }
-  },
-  "json": {
-    "parser": { "allowComments": true },
-    "formatter": {
-      "enabled": true,
-      "indentStyle": "space",
-      "indentWidth": 2,
-      "lineWidth": 100
+      "quoteStyle": "double"
     }
   }
 }
