@@ -22,28 +22,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: "./frontend/package.json"
-          cache: "yarn"
-          cache-dependency-path: "./frontend/yarn.lock"
+          cache: "npm"
+          cache-dependency-path: "./frontend/package-lock.json"
 
       - name: Install Dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: Cache Jest
-        uses: actions/cache@v4
-        env:
-          cache-name: cache-jest
-        with:
-          path: ./frontend/node_modules/.cache/jest
-          key: ${{ runner.os }}-jest-${{ hashFiles('frontend/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-jest-
+        run: npm install --frozen-lockfile
 
       - name: Get number of CPU cores
         uses: SimenB/github-actions-cpu-cores@v2
         id: cpu-cores
 
       - name: Run format and lint check
-        run: yarn biome check
-
-      - name: Run tests
-        run: npx jest --bail --forceExit --max-workers ${{ steps.cpu-cores.outputs.count }}
+        run: npm run check
