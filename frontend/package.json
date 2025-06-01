@@ -2,6 +2,10 @@
   "name": "vite-project",
   "private": true,
   "type": "module",
+    "engines": {
+    "node": "22.16.0",
+    "npm": "11.4.0"
+  },
   "scripts": {
     "dev": "vite --port 3000",
     "start": "vite --port 3000",
@@ -38,9 +42,5 @@
     "vite": "^6.1.0",
     "vitest": "^3.1.4",
     "web-vitals": "^4.2.4"
-  },
-  "volta": {
-    "node": "22.16.0",
-    "npm": "11.4.0"
   }
 }
