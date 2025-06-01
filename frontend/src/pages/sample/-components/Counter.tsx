@@ -7,7 +7,10 @@ const Counter = () => {
     <div className="p-6 max-w-sm mx-auto bg-white rounded-2xl shadow-md text-center space-y-4">
       <h2 className="text-2xl font-bold">カウンター</h2>
       <p className="text-lg text-gray-700">
-        現在の値: <span className="font-mono">{count}</span>
+        現在の値:{" "}
+        <span className="font-mono" data-testid="counter">
+          {count}
+        </span>
       </p>
       <div className="flex justify-center space-x-4">
         <button
