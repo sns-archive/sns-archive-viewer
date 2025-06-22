@@ -36,6 +36,9 @@ gem 'ridgepole' # マイグレーションに使用するgem
 # Github: https://github.com/ruby-i18n/i18n
 gem 'rails-i18n' # i18n 日本語化対応用gem
 
+# Github: https://github.com/sho-work/composite_validator
+gem 'composite_validator' # 関連モデルのバリデーションを親モデルに集約
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 

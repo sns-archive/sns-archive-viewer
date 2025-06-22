@@ -8,8 +8,8 @@ class Memo
 
     attr_reader :memo, :memo_tags
 
-    validates :memo, cascade: true
-    validates :memo_tags, cascade: true
+    validates :memo, composite: true
+    validates :memo_tags, composite: true
 
     # @param params [ActionController::Parameters] Controller側でpermitしたパラメータ
     #   @option params [String] :title メモのタイトル

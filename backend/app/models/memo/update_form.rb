@@ -6,7 +6,7 @@ class Memo
 
     attr_reader :id, :params
 
-    validates :memo, cascade: true
+    validates :memo, composite: true
 
     # @param params [ActionController::Parameters] Controller側でpermitしたパラメータ
     #   @option params [String] :content メモの本文
